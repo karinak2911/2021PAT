@@ -12,7 +12,7 @@ package stringsChars;
  */
 import javax.swing.JOptionPane;
 
-public class LessonWork {
+public class TestChar {
     
     public static void main (String [] args){ 
        char input = (JOptionPane.showInputDialog("Enter a single character:").charAt(0));
