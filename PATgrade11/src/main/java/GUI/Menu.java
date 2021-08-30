@@ -43,7 +43,7 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         priceTextArea = new javax.swing.JTextArea();
         addButton = new javax.swing.JButton();
-        chekoutButtom = new javax.swing.JButton();
+        addDetailsButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,9 +88,17 @@ public class Menu extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Name", "Price"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(menuItemsTable);
 
         itemTypeLabel.setText("Item type: ");
@@ -105,10 +113,10 @@ public class Menu extends javax.swing.JFrame {
 
         addButton.setText("ADD ");
 
-        chekoutButtom.setText("CHECKOUT");
-        chekoutButtom.addActionListener(new java.awt.event.ActionListener() {
+        addDetailsButton.setText("ADD DETAILS");
+        addDetailsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chekoutButtomActionPerformed(evt);
+                addDetailsButtonActionPerformed(evt);
             }
         });
 
@@ -128,18 +136,18 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(priceLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(chekoutButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(chekoutButtom, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addDetailsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(36, 36, 36)
@@ -151,8 +159,8 @@ public class Menu extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(priceLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(33, 33, 33))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -166,9 +174,9 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_wrapRadioButtonActionPerformed
 
-    private void chekoutButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chekoutButtomActionPerformed
+    private void addDetailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDetailsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_chekoutButtomActionPerformed
+    }//GEN-LAST:event_addDetailsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,8 +215,8 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JButton addDetailsButton;
     private javax.swing.JRadioButton burgerRadioButton2;
-    private javax.swing.JButton chekoutButtom;
     private javax.swing.JRadioButton drinkRadioButton;
     private javax.swing.JComboBox<String> itemTypeComboBox;
     private javax.swing.JLabel itemTypeLabel;

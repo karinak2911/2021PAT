@@ -12,10 +12,19 @@ package Backend;
  */
 public class Order {
     private Student s; 
-    private String food; 
-    private int price; 
+    private MenuItem [] menuItemArr = new MenuItem[200]; 
+    private int [] indivualPrice = new int[200]; 
+    private int totalPrice; 
     private String time; 
     private boolean paid; 
+    private int size; 
+
+    public Order(Student s, int totalPrice, String time, boolean paid) {
+        this.s = s;
+        this.totalPrice = totalPrice;
+        this.time = time;
+        this.paid = paid;
+    }
 
     public Student getS() {
         return s;
@@ -23,22 +32,6 @@ public class Order {
 
     public void setS(Student s) {
         this.s = s;
-    }
-
-    public String getFood() {
-        return food;
-    }
-
-    public void setFood(String food) {
-        this.food = food;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public String getTime() {
@@ -57,12 +50,13 @@ public class Order {
         this.paid = paid;
     }
 
-    public Order(Student s, String food, int price, String time, boolean paid) {
-        this.s = s;
-        this.food = food;
-        this.price = price;
-        this.time = time;
-        this.paid = paid;
+    public int getTotalPrice() {
+        int totalPrice = 0 ; 
+        for(int i = 0; i < size; i++){ 
+            totalPrice += indivualPrice[i]; 
+        }
+        return totalPrice;
     }
     
-}
+
+} 

@@ -38,7 +38,7 @@ public class ManageMenu extends javax.swing.JFrame {
         removeItemButton = new javax.swing.JButton();
         homeButton = new javax.swing.JButton();
         itemNameTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        itemNameLabel = new javax.swing.JLabel();
         itemTypeLabel = new javax.swing.JLabel();
         sandwichRadioButton = new javax.swing.JRadioButton();
         burgerRadioButton2 = new javax.swing.JRadioButton();
@@ -87,7 +87,7 @@ public class ManageMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Item name: ");
+        itemNameLabel.setText("Item name: ");
 
         itemTypeLabel.setText("Item type: ");
 
@@ -96,6 +96,11 @@ public class ManageMenu extends javax.swing.JFrame {
 
         buttonGroup1.add(burgerRadioButton2);
         burgerRadioButton2.setText("Burger");
+        burgerRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                burgerRadioButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(drinkRadioButton);
         drinkRadioButton.setText("Drink");
@@ -122,11 +127,21 @@ public class ManageMenu extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Name ", "Type", "Price"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         menuTable.setToolTipText("");
+        menuTable.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(menuTable);
+        menuTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         priceLabel.setText("Price: ");
 
@@ -136,7 +151,7 @@ public class ManageMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(itemNameLabel)
                     .addComponent(itemTypeLabel)
                     .addComponent(itemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -144,19 +159,26 @@ public class ManageMenu extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(saladRadioButton)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(sandwichRadioButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(burgerRadioButton2)
-                                            .addComponent(wrapRadioButton)
-                                            .addComponent(drinkRadioButton)))
-                                    .addComponent(snackRadioButton)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(sandwichRadioButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(wrapRadioButton))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(priceLabel)))
+                                        .addGap(67, 67, 67))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(snackRadioButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(drinkRadioButton)
+                                        .addGap(63, 63, 63))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(priceLabel)))
-                                .addGap(58, 58, 58)
+                                        .addComponent(saladRadioButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(burgerRadioButton2)
+                                        .addGap(58, 58, 58)))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +198,7 @@ public class ManageMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
-                        .addComponent(jLabel2)
+                        .addComponent(itemNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(itemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -184,24 +206,20 @@ public class ManageMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(burgerRadioButton2)
-                                        .addGap(68, 68, 68))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(sandwichRadioButton)
-                                            .addComponent(wrapRadioButton))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(saladRadioButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(snackRadioButton)
-                                            .addComponent(drinkRadioButton))
-                                        .addGap(5, 5, 5)
-                                        .addComponent(priceLabel)
-                                        .addGap(12, 12, 12)))
-                                .addGap(26, 26, 26))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(sandwichRadioButton)
+                                    .addComponent(wrapRadioButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(saladRadioButton)
+                                    .addComponent(burgerRadioButton2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(snackRadioButton)
+                                    .addComponent(drinkRadioButton))
+                                .addGap(5, 5, 5)
+                                .addComponent(priceLabel)
+                                .addGap(38, 38, 38))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(itempriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
@@ -243,6 +261,10 @@ public class ManageMenu extends javax.swing.JFrame {
     private void itemNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemNameTextFieldActionPerformed
+
+    private void burgerRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burgerRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_burgerRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,11 +311,11 @@ public class ManageMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton drinkRadioButton;
     private javax.swing.JButton editItemButton;
     private javax.swing.JButton homeButton;
+    private javax.swing.JLabel itemNameLabel;
     private javax.swing.JTextField itemNameTextField;
     private javax.swing.JLabel itemTypeLabel;
     private javax.swing.JTextField itempriceTextField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;

@@ -12,11 +12,11 @@ package Backend;
 public class Student {
     
     private String name; 
-    private int age; 
+    private int grade; 
 
     public Student(String name, int age) {
         this.name = name;
-        this.age = age;
+        this.grade = age;
     }
 
     public String getName() {
@@ -28,11 +28,11 @@ public class Student {
     }
 
     public int getAge() {
-        return age;
+        return grade;
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.grade = age;
     }
     
     
