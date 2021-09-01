@@ -102,7 +102,7 @@ public class ManageStudents extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        studentsTable.setTableHeader(STUDENTS
+        studentsTable.setTableHeader("STUDENTS"
         );
         jScrollPane3.setViewportView(studentsTable);
 
