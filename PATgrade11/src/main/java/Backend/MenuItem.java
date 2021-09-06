@@ -10,11 +10,12 @@ package Backend;
  * @author Navi
  */
 public class MenuItem {
-    private String name; 
-    private int price; 
-    private String type; 
+    protected String name; 
+    protected double price; 
+    protected String type; 
+    
 
-    public MenuItem(String name, int price, String type) {
+    public MenuItem(String name, double price, String type) {
         this.name = name;
         this.price = price;
         this.type = type;
@@ -28,11 +29,11 @@ public class MenuItem {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -44,5 +45,11 @@ public class MenuItem {
         this.type = type;
     }
     
+    public String toString(){ 
+        return name + "#" + price + "#" + type; 
+    }
+   
+                
+                
     
 }

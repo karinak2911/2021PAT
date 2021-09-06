@@ -5,6 +5,10 @@
  */
 package Backend;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 
 /**
  *
@@ -12,9 +16,8 @@ package Backend;
  */
 public class Order {
     private Student s; 
-    private MenuItem [] menuItemArr = new MenuItem[200]; 
-    private int [] indivualPrice = new int[200]; 
-    private int totalPrice; 
+    private OrderedItem [] arr = new OrderedItem[200]; 
+    private double totalPrice; 
     private String time; 
     private boolean paid; 
     private int size; 
@@ -49,14 +52,17 @@ public class Order {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
+    
+    public static void addOrder(Student s, OrderedItem [] arr, double totalPrice, String time, boolean paid) {
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(" name"), true);
+			//FIX! pw.println(s.toString() + "#" + arr.toString() + "#" + totalPrice "#" + time + "#");
+			pw.close();
+		} catch (IOException ex) {
+			System.out.println("Could not write to file");
+		}
+	}
 
-    public int getTotalPrice() {
-        int totalPrice = 0 ; 
-        for(int i = 0; i < size; i++){ 
-            totalPrice += indivualPrice[i]; 
-        }
-        return totalPrice;
-    }
     
 
 } 

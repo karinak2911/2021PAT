@@ -86,6 +86,10 @@ public class ViewOrders extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(ordersTable);
+        if (ordersTable.getColumnModel().getColumnCount() > 0) {
+            ordersTable.getColumnModel().getColumn(0).setHeaderValue("Name");
+            ordersTable.getColumnModel().getColumn(1).setHeaderValue("Grade");
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

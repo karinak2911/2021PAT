@@ -168,6 +168,9 @@ public class AddOrder extends javax.swing.JFrame {
 
     private void addOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderButtonActionPerformed
         // TODO add your handling code here:
+        new Home().setVisible(true);
+		//and close this screen.
+		dispose();
     }//GEN-LAST:event_addOrderButtonActionPerformed
 
     /**

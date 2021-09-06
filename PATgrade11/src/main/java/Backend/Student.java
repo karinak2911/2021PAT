@@ -14,9 +14,9 @@ public class Student {
     private String name; 
     private int grade; 
 
-    public Student(String name, int age) {
+    public Student(String name, int grade) {
         this.name = name;
-        this.grade = age;
+        this.grade = grade;
     }
 
     public String getName() {
@@ -27,12 +27,16 @@ public class Student {
         this.name = name;
     }
 
-    public int getAge() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setAge(int age) {
-        this.grade = age;
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+    
+    public int compareTo(Student s){ 
+        return this.grade - s.getGrade(); 
     }
     
     
