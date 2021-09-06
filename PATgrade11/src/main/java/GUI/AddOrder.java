@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import Backend.StudentArray;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Navi
@@ -16,6 +19,23 @@ public class AddOrder extends javax.swing.JFrame {
      */
     public AddOrder() {
         initComponents();
+      
+
+		//set the frame in the centre of the screen
+		setLocationRelativeTo(null);
+
+		/**
+		 * A combo box (drop down selection) requires a comboModel to
+		 * "hold" all the values in the drop down list. This is why we
+		 * use an array to get the individual values to add to the
+		 * comboModel.
+		 */
+		DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+		String[] students = StudentArray.getStudentsnamesAsarrayForComboBox(); 
+		for (int i = 0; i < students.length; i++) {
+			comboModel.addElement(students[i]);
+		}
+		studentsComboBox.setModel(comboModel);
     }
 
     /**
@@ -46,6 +66,11 @@ public class AddOrder extends javax.swing.JFrame {
         studentLabel.setText("Student: ");
 
         studentsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        studentsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                studentsComboBoxActionPerformed(evt);
+            }
+        });
 
         timeLabel.setText("Time:");
 
@@ -172,6 +197,12 @@ public class AddOrder extends javax.swing.JFrame {
 		//and close this screen.
 		dispose();
     }//GEN-LAST:event_addOrderButtonActionPerformed
+
+    private void studentsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentsComboBoxActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_studentsComboBoxActionPerformed
 
     /**
      * @param args the command line arguments

@@ -23,9 +23,9 @@ public class StudentArray {
     private int size; 
     
     
-        public Student[] getStudents() {
+        public StudentArray() {
 		try {
-			Scanner sc = new Scanner(new File("fileName"));
+			Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
 			
 
 			while (sc.hasNextLine()) {
@@ -40,12 +40,33 @@ public class StudentArray {
 			
 			}
 			sc.close();
-			return arr;
+			
+		} catch (FileNotFoundException ex) {
+			System.out.println("Students file not found");
+		
+		}
+                
+	}
+        
+        public String[] getStudentsnamesAsarrayForComboBox() {
+		try {
+			Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
+			
+			String[] outputArr = new String[size];
+			int currentIndex = 0;
+			while (sc.hasNextLine()) {
+                            String line = sc.nextLine(); 
+                            Scanner lineSc = new Scanner(line).useDelimiter("@"); 
+                            String studentName = lineSc.next(); 
+		             outputArr[currentIndex] = studentName; 
+				currentIndex++;
+			}
+			sc.close();
+			return outputArr;
 		} catch (FileNotFoundException ex) {
 			System.out.println("Students file not found");
 			return null;
 		}
-                
 	}
 
     public int getSize() {
@@ -68,19 +89,21 @@ public class StudentArray {
             
         }
     
-    public static void addStudent(String name, int grade) {
+    public void addStudent(String name, int grade) {
 		try {
-			PrintWriter pw = new PrintWriter(new FileWriter("Navi//Downloads//Students.odt", true));
+			PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt", true));
 			pw.println(name + "@" + grade);
 			pw.close();
 		} catch (IOException ex) {
 			System.out.println("Could not write to file");
 		}
-	}
+	}// have a print array to fill metho, does not apped but overwrites 
+    
+    public void printArray
 
-	public static void deleteStudent(String name, int grade) {
+	public void deleteStudent(String name, int grade) {
 		try {
-			Scanner sc = new Scanner(new File("Navi//Downloads//Students.odt"));
+			Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
 			String output = "";
 			String details = name + "@" + grade;
 
@@ -92,7 +115,7 @@ public class StudentArray {
 			}
 			sc.close();
 
-			PrintWriter pw = new PrintWriter(new FileWriter("Navi//Downloads//Students.odt", false));
+			PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt", false));
 			pw.print(output);
 			pw.close();
 		} catch (FileNotFoundException ex) {
@@ -101,4 +124,10 @@ public class StudentArray {
 			System.out.println("Could not delete student");
 		}
 	}
+        
+        
+        public Object [][] getStudentTableData(){ 
+            Object[][] data = new Object[size][2]; 
+            
+        }
 }

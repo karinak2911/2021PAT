@@ -18,6 +18,10 @@ public class ManageStudents extends javax.swing.JFrame {
      */
     public ManageStudents() {
         initComponents();
+        
+     
+        
+        
     }
 
     /**
@@ -199,8 +203,6 @@ public class ManageStudents extends javax.swing.JFrame {
 		arr.addStudent(nameAndSurname, grade); 
 		//Use the backend to update the frontend
                 arr.getStudents(); 
-                
-		
                 
     }//GEN-LAST:event_addStudentButtonActionPerformed
 
