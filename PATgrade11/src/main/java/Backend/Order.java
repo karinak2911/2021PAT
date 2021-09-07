@@ -16,11 +16,10 @@ import java.io.PrintWriter;
  */
 public class Order {
     private Student s; 
-    private OrderedItem [] arr = new OrderedItem[200]; 
     private double totalPrice; 
     private String time; 
     private boolean paid; 
-    private int size; 
+
 
     public Order(Student s, int totalPrice, String time, boolean paid) {
         this.s = s;
@@ -52,17 +51,6 @@ public class Order {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
-    
-    public static void addOrder(Student s, OrderedItem [] arr, double totalPrice, String time, boolean paid) {
-		try {
-			PrintWriter pw = new PrintWriter(new FileWriter(" name"), true);
-			//FIX! pw.println(s.toString() + "#" + arr.toString() + "#" + totalPrice "#" + time + "#");
-			pw.close();
-		} catch (IOException ex) {
-			System.out.println("Could not write to file");
-		}
-	}
-
     
 
 } 

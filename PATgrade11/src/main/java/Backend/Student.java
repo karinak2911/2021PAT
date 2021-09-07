@@ -39,6 +39,14 @@ public class Student {
         return this.grade - s.getGrade(); 
     }
     
+            public String fileFormat(){ 
+           return this.name + "£" + this.grade; 
+        }
+            
+            public int compareTo(String name){ 
+                return this.name.compareToIgnoreCase(name); 
+            }
+    
     
     
 }

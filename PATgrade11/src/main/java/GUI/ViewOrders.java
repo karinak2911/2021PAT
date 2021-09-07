@@ -76,20 +76,24 @@ public class ViewOrders extends javax.swing.JFrame {
 
         ordersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Grade", "Order", "Time", "Paid"
+                "Name", "Grade", "Order", "Time", "Paid", "Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(ordersTable);
-        if (ordersTable.getColumnModel().getColumnCount() > 0) {
-            ordersTable.getColumnModel().getColumn(0).setHeaderValue("Name");
-            ordersTable.getColumnModel().getColumn(1).setHeaderValue("Grade");
-        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

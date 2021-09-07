@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Backend.StudentArray;
+import Backend.StudentManager;
 
 /**
  *
@@ -195,14 +195,14 @@ public class ManageStudents extends javax.swing.JFrame {
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         // TODO add your handling code here:
-        StudentArray arr = new StudentArray(); 
+        StudentManager arr = new StudentManager(); 
                 String nameAndSurname = nameAndSurnameTextField.getText();
 		int grade = gradeComboBox.getSelectedIndex(); 
 
 		//Use the backend to manipulate the textfile data
 		arr.addStudent(nameAndSurname, grade); 
 		//Use the backend to update the frontend
-                arr.getStudents(); 
+                
                 
     }//GEN-LAST:event_addStudentButtonActionPerformed
 

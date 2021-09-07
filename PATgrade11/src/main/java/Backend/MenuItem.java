@@ -45,7 +45,7 @@ public class MenuItem {
         this.type = type;
     }
     
-    public String toString(){ 
+    public String fileFormat(){ 
         return name + "#" + price + "#" + type; 
     }
    

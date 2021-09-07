@@ -19,93 +19,86 @@ import java.util.logging.Logger;
  * @author Navi
  */
 public class MenuItemArray {
-    
-    MenuItem [] arr = new MenuItem[200];
+
+    MenuItem[] arr = new MenuItem[200];
     private int size;
-    
-    public MenuItemArray(){ 
+
+    public MenuItemArray() {
         try {
-            File f = new File("Navi//Downloads//Students.odt"); 
+            File f = new File("Navi//Downloads//Students.odt");
             Scanner sc = new Scanner(f);
-            while(sc.hasNextLine()){ 
-                String line = sc.nextLine(); 
-                Scanner lc = new Scanner(line).useDelimiter("%"); 
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                Scanner lc = new Scanner(line).useDelimiter("%");
                 String name = lc.next();
-                 double price = lc.nextDouble();
-                String type = lc.next(); 
-                
-                
-                arr[size] = new MenuItem(name, price, type); 
-                size++; 
+                double price = lc.nextDouble();
+                String type = lc.next();
+
+                arr[size] = new MenuItem(name, price, type);
+                size++;
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(StudentArray.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StudentManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
-        
+
     }
-    
-     public static void addMenuItem(String name, double price, String type) {
-		try {
-			/**
-			 * A scanner "reads" a file, a printwriter "writes" to
-			 * files A scanner needs a file object to read from, a
-			 * printwriter needs a filewriter object to write with
-			 * (the boolean value is to "append" - true or
-			 * "overwrite" - false.
-			 */
-			FileWriter fw = new FileWriter("", true);
-			PrintWriter pw = new PrintWriter(fw);
-			//add to the text file in the pre-constructed format.
-			pw.println(name + "#" + price + "#" + type);
-			//ALWAYS close a printwriter!!!!
-			pw.close();
-		} catch (IOException ex) {
-			System.out.println("Could not write to file");
-		}
-     } 
+
+    public void addMenuItem(String name, double price, String type) {
+        this.shiftRight(size - 1);
+        arr[size -1] = new MenuItem(name, price, type); 
+
+    }
+
+
+public void shiftRight(int index) {
+        size++;
+        for (int i = size - 1; i > index; i--) {
+            arr[i] = arr[i - 1];
+        }
+    }
+
+  public void shiftLeft(int index) {
+        for (int i = index; i < size; i++) {
+            arr[i] = arr[i + 1];
+        }
+        size--;
+    }
                 
      
-     public static void deleteMenuItem(String name, String type) {
-		try {
-			Scanner sc = new Scanner(new File(""));
-			MenuItem [] arr = new MenuItem[200]; 
-                        int size = 0; 
+     public void deleteMenuItem(String name, String type) {
+		 int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (arr[i].name.equalsIgnoreCase(name) && arr[i].type.equalsIgnoreCase(type)) {
+                index = i;
+            }
 
-			while (sc.hasNextLine()) {
-				String line = sc.nextLine();
-
-				Scanner linesc = new Scanner(line).useDelimiter("c");
-				String currentMenuItemName = linesc.next();
-                                double currentMenuItemPrice = linesc.nextDouble(); 
-                                String currentMenuItemType = linesc.next(); 
-				linesc.close();
-
-				if (!currentMenuItemName.equalsIgnoreCase(name)&& !(currentMenuItemType.equalsIgnoreCase(type))) {
-					/**
-					 * only add to the output string if it
-					 * is NOT the assessment to delete
-					 */
-					arr[size] = new MenuItem(currentMenuItemName, currentMenuItemPrice, currentMenuItemType); 
-                                        size++; 
-				}
-			}
-			sc.close();
-
-			/**
-			 * use a printwriter with the "overwrite" option to
-			 * re-write all the assessments without the deleted one
-			 */
-			PrintWriter pw = new PrintWriter(new FileWriter("", false));
-			pw.print(arr[size].toString());
-			pw.close();
-
-		} catch (FileNotFoundException ex) {
-			System.out.println("Students file not found");
-		} catch (IOException ex) {
-			System.out.println("Could not delete student");
-		}
-	}
+            if (index >= 0) {
+                this.shiftLeft(index);
+            }
+        }
 
 }
+     
+public void printArrayToFile() {
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
+            for (int i = 0; i < size; i++) {
+                pw.println(arr[i].fileFormat());
+            }
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Could not write to file");
+        }
+    }
+
+
+public Object [][] getMenuItemFromType(String type){ 
+    Object arr = new Object [size][2]; 
+    for(int i = 0; i < size; i++){ 
+        for(int j = 0; j < 2; j++){ 
+            MenuItem current = arr[i];  
+        }
+    }
+}
+} 
+

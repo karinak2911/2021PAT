@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Backend.StudentArray;
+import Backend.StudentManager;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -31,9 +31,10 @@ public class AddOrder extends javax.swing.JFrame {
 		 * comboModel.
 		 */
 		DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
-		String[] students = StudentArray.getStudentsnamesAsarrayForComboBox(); 
-		for (int i = 0; i < students.length; i++) {
-			comboModel.addElement(students[i]);
+		StudentManager names = new StudentManager(); 
+                String [] namesForCombo = names.getStudentsnamesAsarrayForComboBox(); 
+		for (int i = 0; i < namesForCombo.length; i++) {
+			comboModel.addElement(namesForCombo[i]);
 		}
 		studentsComboBox.setModel(comboModel);
     }

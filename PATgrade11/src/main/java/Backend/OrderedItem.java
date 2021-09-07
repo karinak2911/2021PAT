@@ -21,4 +21,8 @@ public class OrderedItem extends MenuItem{
         return this.quantity * this.price; 
     }
     
+    public String fileFormat(){
+        return this.name + this.type + this.getTotal(); 
+    }
+    
 }
