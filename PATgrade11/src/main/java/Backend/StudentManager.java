@@ -100,7 +100,7 @@ public class StudentManager {
         }
     }
 
-    public void printArrayToFile() {
+    public void printArrayToFile(Student [] arr) {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
             for (int i = 0; i < size; i++) {
@@ -123,6 +123,8 @@ public class StudentManager {
                 this.shiftLeft(index);
             }
         }
+        this.printArrayToFile(arr);
+        
     }
 
     public void addStudent(String name, int grade) {
