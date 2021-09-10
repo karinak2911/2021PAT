@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class MenuItemArray {
 
-    MenuItem[] arr = new MenuItem[200];
+    MenuItem[] menuItemArr = new MenuItem[200];
     private int size;
 
     public MenuItemArray() {
@@ -34,7 +34,7 @@ public class MenuItemArray {
                 double price = lc.nextDouble();
                 String type = lc.next();
 
-                arr[size] = new MenuItem(name, price, type);
+                menuItemArr[size] = new MenuItem(name, price, type);
                 size++;
             }
         } catch (FileNotFoundException ex) {
@@ -45,30 +45,28 @@ public class MenuItemArray {
 
     public void addMenuItem(String name, double price, String type) {
         this.shiftRight(size - 1);
-        arr[size -1] = new MenuItem(name, price, type); 
+        menuItemArr[size - 1] = new MenuItem(name, price, type);
 
     }
 
-
-public void shiftRight(int index) {
+    public void shiftRight(int index) {
         size++;
         for (int i = size - 1; i > index; i--) {
-            arr[i] = arr[i - 1];
+            menuItemArr[i] = menuItemArr[i - 1];
         }
     }
 
-  public void shiftLeft(int index) {
+    public void shiftLeft(int index) {
         for (int i = index; i < size; i++) {
-            arr[i] = arr[i + 1];
+            menuItemArr[i] = menuItemArr[i + 1];
         }
         size--;
     }
-                
-     
-     public void deleteMenuItem(String name, String type) {
-		 int index = -1;
+
+    public void deleteMenuItem(String name, String type) {
+        int index = -1;
         for (int i = 0; i < size; i++) {
-            if (arr[i].name.equalsIgnoreCase(name) && arr[i].type.equalsIgnoreCase(type)) {
+            if (menuItemArr[i].name.equalsIgnoreCase(name) && menuItemArr[i].type.equalsIgnoreCase(type)) {
                 index = i;
             }
 
@@ -77,13 +75,13 @@ public void shiftRight(int index) {
             }
         }
 
-}
-     
-public void printArrayToFile() {
+    }
+
+    public void printArrayToFile() {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
             for (int i = 0; i < size; i++) {
-                pw.println(arr[i].fileFormat());
+                pw.println(menuItemArr[i].fileFormat());
             }
             pw.close();
         } catch (IOException ex) {
@@ -91,14 +89,13 @@ public void printArrayToFile() {
         }
     }
 
-
-public Object [][] getMenuItemFromType(String type){ 
-    Object arr = new Object [size][2]; 
-    for(int i = 0; i < size; i++){ 
-        for(int j = 0; j < 2; j++){ 
-            
+    public Object[][] getMenuItemFromType(String type) {
+        Object[][] out = new Object[size][2];
+        for (int row = 0; row < size; row++) {
+            out[row][0] = menuItemArr[row].getName();
+            out[row][1] = new Double(menuItemArr[row].getPrice());
         }
+
+        return out;
     }
 }
-} 
-
