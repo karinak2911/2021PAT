@@ -30,7 +30,7 @@
         <Property name="text" type="java.lang.String" value="Item name: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="typeButtonGroup">
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButton3">
       <Properties>
@@ -106,7 +106,7 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="wrapRadioButton" min="-2" max="-2" attributes="0"/>
-                              <Component id="burgerRadioButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="burgerRadioButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -161,7 +161,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="saladRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="burgerRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="burgerRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -204,26 +204,26 @@
         <Component class="javax.swing.JRadioButton" name="sandwichRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="typeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sandwich"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="burgerRadioButton2">
+        <Component class="javax.swing.JRadioButton" name="burgerRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="typeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Burger"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="burgerRadioButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="burgerRadioButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="drinkRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="typeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Drink"/>
           </Properties>
@@ -231,7 +231,7 @@
         <Component class="javax.swing.JRadioButton" name="saladRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="typeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Salad"/>
           </Properties>
@@ -239,7 +239,7 @@
         <Component class="javax.swing.JRadioButton" name="wrapRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="typeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Wrap"/>
           </Properties>
@@ -250,7 +250,7 @@
         <Component class="javax.swing.JRadioButton" name="snackRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="typeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Snack"/>
           </Properties>
@@ -279,6 +279,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ADD ITEM"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addItemButtonActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -316,7 +319,6 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
-                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>

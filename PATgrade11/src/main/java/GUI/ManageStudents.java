@@ -5,7 +5,11 @@
  */
 package GUI;
 
-import Backend.StudentManager;
+import Backend.Grades;
+import Backend.MenuItemArray;
+import Backend.StudentArray;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +24,26 @@ public class ManageStudents extends javax.swing.JFrame {
         initComponents();
         
         
-        
-     
+DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+		Grades grades = new Grades(); 
+                String [] gradesForCombo = grades.getArr(); 
+		for (int i = 0; i < gradesForCombo.length; i++) {
+			comboModel.addElement(gradesForCombo[i]);
+		}
+		gradeComboBox.setModel(comboModel);
+                
+                
+                
+        StudentArray students = new StudentArray();
+        String[] coloumNames = new String[2];
+        coloumNames[0] = "Names";
+        coloumNames[1] = "Grade";
+
+        Object[][] data = students.getStudentTableData();
+
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        studentsTable.setModel(model);
+
         
         
     }
@@ -45,12 +67,12 @@ public class ManageStudents extends javax.swing.JFrame {
         gradeLabel = new javax.swing.JLabel();
         addStudentButton = new javax.swing.JButton();
         nameAndSurnameTextField = new javax.swing.JTextField();
-        gradeComboBox = new javax.swing.JComboBox<>();
         deleteStudentButton = new javax.swing.JButton();
         homeButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         studentsTableLabel = new javax.swing.JLabel();
+        gradeComboBox = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -87,10 +109,6 @@ public class ManageStudents extends javax.swing.JFrame {
                 nameAndSurnameTextFieldActionPerformed(evt);
             }
         });
-
-        gradeComboBox.setMaximumRowCount(15);
-        gradeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        gradeComboBox.setToolTipText("");
 
         deleteStudentButton.setText("DELETE STUDENT");
         deleteStudentButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +147,8 @@ public class ManageStudents extends javax.swing.JFrame {
         jScrollPane3.setViewportView(studentsTable);
 
         studentsTableLabel.setText("Students: ");
+
+        gradeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,7 +198,7 @@ public class ManageStudents extends javax.swing.JFrame {
                         .addComponent(nameAndSurnameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(gradeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(gradeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
@@ -206,48 +226,65 @@ public class ManageStudents extends javax.swing.JFrame {
 
     private void nameAndSurnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameAndSurnameTextFieldActionPerformed
         // TODO add your handling code here:
-   
+
     }//GEN-LAST:event_nameAndSurnameTextFieldActionPerformed
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         // TODO add your handling code here:
-        StudentManager manage = new StudentManager(); 
-                String nameAndSurname = nameAndSurnameTextField.getText();
-		int grade = gradeComboBox.getSelectedIndex(); 
+        
+        StudentArray manage = new StudentArray();
+        String nameAndSurname = nameAndSurnameTextField.getText();
+        int grade = Integer.parseInt((String)gradeComboBox.getSelectedItem());
 
-		//Use the backend to manipulate the textfile data
-		manage.addStudent(nameAndSurname, grade); 
-		//Use the backend to update the frontend
-               
-                
-                
+        //Use the backend to manipulate the textfile data
+        manage.addStudent(nameAndSurname, grade);
+        //Use the backend to update the frontend
+        
+        String[] coloumNames = new String[2];
+        coloumNames[0] = "Names";
+        coloumNames[1] = "Grade";
+
+        Object[][] data = manage.getStudentTableData();
+
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        studentsTable.setModel(model);
+
     }//GEN-LAST:event_addStudentButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new Home().setVisible(true);
-		//and close this screen.
-		dispose();
+        new Home().setVisible(true);
+        //and close this screen.
+        dispose();
 
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void deleteStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentButtonActionPerformed
         // TODO add your handling code here:
-        StudentManager arr = new StudentManager(); 
-                String nameAndSurname = nameAndSurnameTextField.getText();
-		int grade = gradeComboBox.getSelectedIndex(); 
-
-		//Use the backend to manipulate the textfile data
-		arr.deleteStudent(nameAndSurname, grade); 
+        StudentArray arr = new StudentArray();
+        int row = studentsTable.getSelectedRow(); 
+        String nameAndSurname = (String) studentsTable.getValueAt(row, 0);
         
+
+        //Use the backend to manipulate the textfile data
+        arr.deleteStudent(nameAndSurname);
+        StudentArray students = new StudentArray();
+        String[] coloumNames = new String[2];
+        coloumNames[0] = "Names";
+        coloumNames[1] = "Grade";
+
+        Object[][] data = students.getStudentTableData();
+
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        studentsTable.setModel(model);
     }//GEN-LAST:event_deleteStudentButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+       
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

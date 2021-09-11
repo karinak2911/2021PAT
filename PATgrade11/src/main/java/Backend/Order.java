@@ -9,23 +9,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 /**
  *
  * @author Navi
  */
 public class Order {
-    private Student s; 
-    private double totalPrice; 
-    private String time; 
-    private boolean paid; 
 
+    private Student s;
+    private OrderedItemArray orderedItems;
+    private String time;
+    private boolean paid;
+    private double totalPrice;
 
-    public Order(Student s, int totalPrice, String time, boolean paid) {
+    public Order(Student s, OrderedItemArray orderedItems, String time, boolean paid, double totalPrice) {
         this.s = s;
-        this.totalPrice = totalPrice;
+        this.orderedItems = orderedItems;
         this.time = time;
         this.paid = paid;
+        this.totalPrice = totalPrice;
     }
 
     public Student getS() {
@@ -34,6 +35,14 @@ public class Order {
 
     public void setS(Student s) {
         this.s = s;
+    }
+
+    public OrderedItemArray getOrderedItems() {
+        return orderedItems;
+    }
+
+    public void setOrderedItems(OrderedItemArray orderedItems) {
+        this.orderedItems = orderedItems;
     }
 
     public String getTime() {
@@ -51,6 +60,13 @@ public class Order {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
-    
 
-} 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+}

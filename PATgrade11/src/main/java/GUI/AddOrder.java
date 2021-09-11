@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Backend.StudentManager;
+import Backend.StudentArray;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -31,12 +31,19 @@ public class AddOrder extends javax.swing.JFrame {
 		 * comboModel.
 		 */
 		DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
-		StudentManager names = new StudentManager(); 
+		StudentArray names = new StudentArray(); 
                 String [] namesForCombo = names.getStudentsnamesAsarrayForComboBox(); 
 		for (int i = 0; i < namesForCombo.length; i++) {
 			comboModel.addElement(namesForCombo[i]);
 		}
 		studentsComboBox.setModel(comboModel);
+                
+                
+                firstBreakRadioButton.setActionCommand("First Break");
+                secondBreakRadioButton.setActionCommand("Second Break");
+                afterSchoolRadioButton.setActionCommand("After school");
+                hasNotPaidRadioButton.setActionCommand("Has not paid");
+                hasPaidRadioButton.setActionCommand("Has paid");
     }
 
     /**
@@ -48,8 +55,8 @@ public class AddOrder extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        timeButtonGroup = new javax.swing.ButtonGroup();
+        paidButtonGroup = new javax.swing.ButtonGroup();
         cancelButton = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
@@ -60,7 +67,7 @@ public class AddOrder extends javax.swing.JFrame {
         secondBreakRadioButton = new javax.swing.JRadioButton();
         afterSchoolRadioButton = new javax.swing.JRadioButton();
         paidLabel = new javax.swing.JLabel();
-        hasPaidButton = new javax.swing.JRadioButton();
+        hasPaidRadioButton = new javax.swing.JRadioButton();
         addOrderButton = new javax.swing.JButton();
         hasNotPaidRadioButton = new javax.swing.JRadioButton();
 
@@ -84,7 +91,7 @@ public class AddOrder extends javax.swing.JFrame {
 
         timeLabel.setText("Time:");
 
-        buttonGroup1.add(firstBreakRadioButton);
+        timeButtonGroup.add(firstBreakRadioButton);
         firstBreakRadioButton.setText("First Break");
         firstBreakRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,19 +99,19 @@ public class AddOrder extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(secondBreakRadioButton);
+        timeButtonGroup.add(secondBreakRadioButton);
         secondBreakRadioButton.setText("Second Break ");
 
-        buttonGroup1.add(afterSchoolRadioButton);
+        timeButtonGroup.add(afterSchoolRadioButton);
         afterSchoolRadioButton.setText("After school");
 
         paidLabel.setText("Has the student paid");
 
-        buttonGroup2.add(hasPaidButton);
-        hasPaidButton.setText("Has paid");
-        hasPaidButton.addActionListener(new java.awt.event.ActionListener() {
+        paidButtonGroup.add(hasPaidRadioButton);
+        hasPaidRadioButton.setText("Has paid");
+        hasPaidRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hasPaidButtonActionPerformed(evt);
+                hasPaidRadioButtonActionPerformed(evt);
             }
         });
 
@@ -115,7 +122,7 @@ public class AddOrder extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup2.add(hasNotPaidRadioButton);
+        paidButtonGroup.add(hasNotPaidRadioButton);
         hasNotPaidRadioButton.setText("Has not paid");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -144,7 +151,7 @@ public class AddOrder extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(paidLabel)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(hasPaidButton)
+                                        .addComponent(hasPaidRadioButton)
                                         .addGap(74, 74, 74)
                                         .addComponent(hasNotPaidRadioButton)))))
                         .addGap(0, 54, Short.MAX_VALUE))
@@ -170,7 +177,7 @@ public class AddOrder extends javax.swing.JFrame {
                 .addComponent(paidLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hasPaidButton)
+                    .addComponent(hasPaidRadioButton)
                     .addComponent(hasNotPaidRadioButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(addOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,9 +204,9 @@ public class AddOrder extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_firstBreakRadioButtonActionPerformed
 
-    private void hasPaidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hasPaidButtonActionPerformed
+    private void hasPaidRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hasPaidRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hasPaidButtonActionPerformed
+    }//GEN-LAST:event_hasPaidRadioButtonActionPerformed
 
     private void addOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderButtonActionPerformed
         // TODO add your handling code here:
@@ -252,18 +259,18 @@ public class AddOrder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addOrderButton;
     private javax.swing.JRadioButton afterSchoolRadioButton;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton cancelButton;
     private javax.swing.JRadioButton firstBreakRadioButton;
     private javax.swing.JRadioButton hasNotPaidRadioButton;
-    private javax.swing.JRadioButton hasPaidButton;
+    private javax.swing.JRadioButton hasPaidRadioButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.ButtonGroup paidButtonGroup;
     private javax.swing.JLabel paidLabel;
     private javax.swing.JRadioButton secondBreakRadioButton;
     private javax.swing.JLabel studentLabel;
     private javax.swing.JComboBox<String> studentsComboBox;
+    private javax.swing.ButtonGroup timeButtonGroup;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 }

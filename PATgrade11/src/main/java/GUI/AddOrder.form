@@ -2,9 +2,9 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    <Component class="javax.swing.ButtonGroup" name="timeButtonGroup">
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    <Component class="javax.swing.ButtonGroup" name="paidButtonGroup">
     </Component>
     <Component class="javax.swing.JButton" name="cancelButton">
       <Properties>
@@ -93,7 +93,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="paidLabel" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="hasPaidButton" min="-2" max="-2" attributes="0"/>
+                                          <Component id="hasPaidRadioButton" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                                           <Component id="hasNotPaidRadioButton" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -129,7 +129,7 @@
                   <Component id="paidLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="hasPaidButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="hasPaidRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="hasNotPaidRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
@@ -171,7 +171,7 @@
         <Component class="javax.swing.JRadioButton" name="firstBreakRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="timeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="First Break"/>
           </Properties>
@@ -182,7 +182,7 @@
         <Component class="javax.swing.JRadioButton" name="secondBreakRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="timeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Second Break "/>
           </Properties>
@@ -190,7 +190,7 @@
         <Component class="javax.swing.JRadioButton" name="afterSchoolRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup1"/>
+              <ComponentRef name="timeButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="After school"/>
           </Properties>
@@ -200,15 +200,15 @@
             <Property name="text" type="java.lang.String" value="Has the student paid"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="hasPaidButton">
+        <Component class="javax.swing.JRadioButton" name="hasPaidRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup2"/>
+              <ComponentRef name="paidButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Has paid"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hasPaidButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hasPaidRadioButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="addOrderButton">
@@ -222,7 +222,7 @@
         <Component class="javax.swing.JRadioButton" name="hasNotPaidRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="buttonGroup2"/>
+              <ComponentRef name="paidButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Has not paid"/>
           </Properties>

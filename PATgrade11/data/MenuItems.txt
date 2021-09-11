@@ -1,0 +1,5 @@
+Chicken and mayo@12.0@Sandwich
+Chicken@20.0@Salad
+Diet coke@10.0@Drink
+Muffin@15.0@Snack
+Sprite@12.0@Drink

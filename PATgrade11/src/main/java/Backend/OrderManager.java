@@ -19,7 +19,7 @@ public class OrderManager {
     
     public OrderManager(){ 
         try {
-            Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Orders.txt"));
+            Scanner sc = new Scanner(new File("data\\Orders.txt"));
 
             while (sc.hasNextLine()) {
                 Scanner lineSc = new Scanner(sc.nextLine());

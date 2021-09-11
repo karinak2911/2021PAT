@@ -46,7 +46,7 @@ public class MenuItem {
     }
     
     public String fileFormat(){ 
-        return name + "#" + price + "#" + type; 
+        return name + "@" + price + "@" + type; 
     }
    
                 

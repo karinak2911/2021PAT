@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Backend.MenuItemArray;
+import Backend.StudentArray;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Navi
@@ -16,6 +20,27 @@ public class ManageMenu extends javax.swing.JFrame {
      */
     public ManageMenu() {
         initComponents();
+        
+        
+        
+         MenuItemArray items  = new MenuItemArray();
+        String[] coloumNames = new String[3];
+        coloumNames[0] = "Names";
+        coloumNames[1] = "Type";
+        coloumNames[2] = "Price"; 
+
+        Object[][] data = items.getMenuItemFormMangeMenu(); 
+
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        menuTable.setModel(model);
+        
+        
+        sandwichRadioButton.setActionCommand("Sandwich");
+        wrapRadioButton.setActionCommand("Wrap");
+        drinkRadioButton.setActionCommand("Drink");
+        burgerRadioButton.setActionCommand("Burger");
+        saladRadioButton.setActionCommand("Salad");
+        snackRadioButton.setActionCommand("Snack");
     }
 
     /**
@@ -32,13 +57,13 @@ public class ManageMenu extends javax.swing.JFrame {
         jPopupMenu3 = new javax.swing.JPopupMenu();
         editItemButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        typeButtonGroup = new javax.swing.ButtonGroup();
         jRadioButton3 = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         itemNameTextField = new javax.swing.JTextField();
         itemTypeLabel = new javax.swing.JLabel();
         sandwichRadioButton = new javax.swing.JRadioButton();
-        burgerRadioButton2 = new javax.swing.JRadioButton();
+        burgerRadioButton = new javax.swing.JRadioButton();
         drinkRadioButton = new javax.swing.JRadioButton();
         saladRadioButton = new javax.swing.JRadioButton();
         wrapRadioButton = new javax.swing.JRadioButton();
@@ -75,24 +100,24 @@ public class ManageMenu extends javax.swing.JFrame {
 
         itemTypeLabel.setText("Item type: ");
 
-        buttonGroup1.add(sandwichRadioButton);
+        typeButtonGroup.add(sandwichRadioButton);
         sandwichRadioButton.setText("Sandwich");
 
-        buttonGroup1.add(burgerRadioButton2);
-        burgerRadioButton2.setText("Burger");
-        burgerRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        typeButtonGroup.add(burgerRadioButton);
+        burgerRadioButton.setText("Burger");
+        burgerRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                burgerRadioButton2ActionPerformed(evt);
+                burgerRadioButtonActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(drinkRadioButton);
+        typeButtonGroup.add(drinkRadioButton);
         drinkRadioButton.setText("Drink");
 
-        buttonGroup1.add(saladRadioButton);
+        typeButtonGroup.add(saladRadioButton);
         saladRadioButton.setText("Salad");
 
-        buttonGroup1.add(wrapRadioButton);
+        typeButtonGroup.add(wrapRadioButton);
         wrapRadioButton.setText("Wrap");
         wrapRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +125,7 @@ public class ManageMenu extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(snackRadioButton);
+        typeButtonGroup.add(snackRadioButton);
         snackRadioButton.setText("Snack");
 
         priceLabel.setText("Price: ");
@@ -115,6 +140,11 @@ public class ManageMenu extends javax.swing.JFrame {
         });
 
         addItemButton.setText("ADD ITEM");
+        addItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addItemButtonActionPerformed(evt);
+            }
+        });
 
         menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,7 +166,6 @@ public class ManageMenu extends javax.swing.JFrame {
             }
         });
         menuTable.setToolTipText("");
-        menuTable.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(menuTable);
         menuTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
@@ -166,7 +195,7 @@ public class ManageMenu extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(wrapRadioButton)
-                            .addComponent(burgerRadioButton2)))
+                            .addComponent(burgerRadioButton)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(itemNameLabel))
@@ -210,7 +239,7 @@ public class ManageMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(saladRadioButton)
-                            .addComponent(burgerRadioButton2))
+                            .addComponent(burgerRadioButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(snackRadioButton)
@@ -250,6 +279,26 @@ public class ManageMenu extends javax.swing.JFrame {
 
     private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
         // TODO add your handling code here:
+        
+         MenuItemArray arr = new MenuItemArray();
+        int row = menuTable.getSelectedRow(); 
+        String name = (String) menuTable.getValueAt(row, 0);
+        String type = (String) menuTable.getValueAt(row, 1); 
+        
+
+        //Use the backend to manipulate the textfile data
+        arr.deleteMenuItem(name, type);
+        MenuItemArray items  = new MenuItemArray();
+        String[] coloumNames = new String[3];
+        coloumNames[0] = "Names";
+        coloumNames[1] = "Type";
+        coloumNames[2] = "Price"; 
+
+        Object[][] data = items.getMenuItemFormMangeMenu(); 
+
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        menuTable.setModel(model);
+        
     }//GEN-LAST:event_removeItemButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
@@ -273,9 +322,33 @@ public class ManageMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_itemNameTextFieldActionPerformed
 
-    private void burgerRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burgerRadioButton2ActionPerformed
+    private void burgerRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burgerRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_burgerRadioButton2ActionPerformed
+    }//GEN-LAST:event_burgerRadioButtonActionPerformed
+
+    private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
+        // TODO add your handling code here:
+        
+         MenuItemArray manage = new MenuItemArray();
+        String name = itemNameTextField.getText();
+        String type = (String) typeButtonGroup.getSelection().getActionCommand(); 
+        double price = Double.parseDouble(itempriceTextField.getText()) ; 
+
+        //Use the backend to manipulate the textfile data
+        manage.addMenuItem(name, price, type);
+        
+        
+         MenuItemArray items  = new MenuItemArray();
+        String[] coloumNames = new String[3];
+        coloumNames[0] = "Names";
+        coloumNames[1] = "Type";
+        coloumNames[2] = "Price"; 
+
+        Object[][] data = items.getMenuItemFormMangeMenu(); 
+
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        menuTable.setModel(model);
+    }//GEN-LAST:event_addItemButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,8 +390,7 @@ public class ManageMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItemButton;
-    private javax.swing.JRadioButton burgerRadioButton2;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton burgerRadioButton;
     private javax.swing.JRadioButton drinkRadioButton;
     private javax.swing.JButton editItemButton;
     private javax.swing.JButton homeButton;
@@ -339,6 +411,7 @@ public class ManageMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton saladRadioButton;
     private javax.swing.JRadioButton sandwichRadioButton;
     private javax.swing.JRadioButton snackRadioButton;
+    private javax.swing.ButtonGroup typeButtonGroup;
     private javax.swing.JRadioButton wrapRadioButton;
     // End of variables declaration//GEN-END:variables
 }

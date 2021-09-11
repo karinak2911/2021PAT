@@ -18,23 +18,25 @@ import java.util.logging.Logger;
  *
  * @author Navi
  */
-public class StudentManager {
+public class StudentArray {
 
-    Student[] arr = new Student[200];
+    Student[] studentArr = new Student[200];
     private int size;
 
-    public StudentManager() {
+    public StudentArray() {
         try {
-            Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
+            Scanner sc = new Scanner(new File("data\\Students.txt"));
 
             while (sc.hasNextLine()) {
-                Scanner lineSc = new Scanner(sc.nextLine());
+                String line = sc.nextLine(); 
+
+                Scanner lineSc = new Scanner(line);
                 lineSc.useDelimiter("@");
-                String name = sc.next();
-                int grade = sc.nextInt();
+                String name = lineSc.next();
+                int grade = lineSc.nextInt();
 
                 Student s = new Student(name, grade);
-                arr[size] = s;
+                studentArr[size] = s;
                 size++;
 
             }
@@ -49,7 +51,7 @@ public class StudentManager {
 
     public String[] getStudentsnamesAsarrayForComboBox() {
         try {
-            Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
+            Scanner sc = new Scanner(new File("data\\Students.txt"));
 
             String[] outputArr = new String[size];
             int currentIndex = 0;
@@ -72,13 +74,13 @@ public class StudentManager {
         return size;
     }
 
-    public void sort() {
+    public void sort(Student [] studentArr) {
         for (int i = 0; i < size - 1; i++) {
             for (int j = i + 1; j < size; j++) {
-                if (arr[i].compareTo(arr[j]) > 0) {
-                    Student temp = arr[j];
-                    arr[j] = arr[i];
-                    arr[i] = temp;
+                if (studentArr[i].compareTo(studentArr[j]) > 0) {
+                    Student temp = studentArr[j];
+                    studentArr[j] = studentArr[i];
+                    studentArr[i] = temp;
                 }
             }
         }
@@ -88,7 +90,7 @@ public class StudentManager {
     // have a print array to fill metho, does not apped but overwrites
     public void shiftLeft(int index) {
         for (int i = index; i < size; i++) {
-            arr[i] = arr[i + 1];
+            studentArr[i] = studentArr[i + 1];
         }
         size--;
     }
@@ -96,13 +98,13 @@ public class StudentManager {
     public void shiftRight(int index) {
         size++;
         for (int i = size - 1; i > index; i--) {
-            arr[i] = arr[i - 1];
+            studentArr[i] = studentArr[i - 1];
         }
     }
 
     public void printArrayToFile(Student [] arr) {
         try {
-            PrintWriter pw = new PrintWriter(new FileWriter("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Students.txt"));
+            PrintWriter pw = new PrintWriter(new FileWriter("data\\Students.txt"));
             for (int i = 0; i < size; i++) {
                 pw.println(arr[i].fileFormat());
             }
@@ -112,43 +114,44 @@ public class StudentManager {
         }
     }
 
-    public void deleteStudent(String name, int grade) {
-        int index = -1;
+    public void deleteStudent(String name) {
         for (int i = 0; i < size; i++) {
-            if (arr[i].compareTo(name) == 0) {
-                index = i;
+            if (studentArr[i].compareTo(name) == 0) {
+                this.shiftLeft(i);
             }
 
-            if (index >= 0) {
-                this.shiftLeft(index);
-            }
+            
         }
-        this.printArrayToFile(arr);
+
+        this.sort(studentArr);
+        this.printArrayToFile(studentArr);
         
     }
 
     public void addStudent(String name, int grade) {
         int index = 0;
         for (int i = 0; i < size; i++) {
-            if (arr[i].compareTo(name) > 0) {
+            if (studentArr[i].compareTo(name) > 0) {
                 index = i;
                 break;
             }
         }
         this.shiftRight(index);
-        arr[index] = new Student(name, grade);
+        studentArr[index] = new Student(name, grade);
+        this.sort(studentArr);
+        this.printArrayToFile(studentArr);
 
     }
 
     public Object[][] getStudentTableData() {
-        Object[][] data = new Object[size][2];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < 2; j++) {
-                data[i][j] = arr[i]; 
-
-            }
+        Object[][] out = new Object[size][2];
+        for (int row = 0; row < size; row++) {
+           
+            out[row][0] = studentArr[row].getName();
+            out[row][1] = new Integer(studentArr[row].getGrade());
+     
         }
-        return data; 
+        return out; 
 
     }
 }

@@ -40,7 +40,7 @@ public class Student {
     }
     
             public String fileFormat(){ 
-           return this.name + "£" + this.grade; 
+           return this.name + "@" + this.grade; 
         }
             
             public int compareTo(String name){ 

@@ -19,7 +19,7 @@ public class OrderedItemArray {
     
     public OrderedItemArray(){ 
          try {
-            Scanner sc = new Scanner(new File("C:\\Users\\Karinak\\Documents\\NetBeansProjects\\2021PAT\\PATgrade11\\data\\Orders.txt"));
+            Scanner sc = new Scanner(new File("data\\Orders.txt"));
 
             while (sc.hasNextLine()) {
                 Scanner lineSc = new Scanner(sc.nextLine());
@@ -38,6 +38,16 @@ public class OrderedItemArray {
 
         }
 
+    }
+    
+    
+    
+    public String toString(){ 
+        String out = ""; 
+        for(int i = 0; i < size; i++){ 
+            out += arr[i].getName() + "#" + arr[i].getType() + "\n";
+        }
+        return out; 
     }
     }
     
