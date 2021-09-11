@@ -155,7 +155,7 @@ public class Home extends javax.swing.JFrame {
     private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new Menu().setVisible(true);
+		new PlaceOrder().setVisible(true);
 		//and close this screen.
 		dispose();
 
