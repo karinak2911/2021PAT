@@ -13,21 +13,22 @@ import java.util.Scanner;
  *
  * @author Navi
  */
-public class OrderedItemArray {
-    private OrderedItem[] arr = new OrderedItem[200]; 
-    private int size; 
-    
-    public OrderedItemArray(){ 
-         try {
+public class OrderArray {
+
+    private Order[] arr = new Order[200];
+    private int size;
+
+    public OrderArray() {
+        try {
             Scanner sc = new Scanner(new File("data\\Orders.txt"));
 
             while (sc.hasNextLine()) {
                 Scanner lineSc = new Scanner(sc.nextLine());
                 lineSc.useDelimiter("@");
                 String name = sc.next();
-                double Price = sc.nextDouble(); 
-                String type = sc.next(); 
-                  
+                int grade = sc.nextInt();
+                Student s = new Student(name, grade);
+
                 size++;
 
             }
@@ -39,16 +40,13 @@ public class OrderedItemArray {
         }
 
     }
-    
-    
-    
-    public String toString(){ 
-        String out = ""; 
-        for(int i = 0; i < size; i++){ 
-            out += arr[i].getName() + "#" + arr[i].getType() + "\n";
-        }
-        return out; 
-    }
-    }
-    
 
+    public Order[] getArr() {
+        return arr;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+}

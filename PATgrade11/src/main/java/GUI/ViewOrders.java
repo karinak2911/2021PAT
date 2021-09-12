@@ -168,9 +168,9 @@ public class ViewOrders extends javax.swing.JFrame {
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new Home().setVisible(true);
-		//and close this screen.
-		dispose();
+        new Home().setVisible(true);
+        //and close this screen.
+        dispose();
 
     }//GEN-LAST:event_homeButtonActionPerformed
 

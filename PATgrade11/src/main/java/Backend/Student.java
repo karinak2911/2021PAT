@@ -10,9 +10,9 @@ package Backend;
  * @author Navi
  */
 public class Student {
-    
-    private String name; 
-    private int grade; 
+
+    private String name;
+    private int grade;
 
     public Student(String name, int grade) {
         this.name = name;
@@ -34,19 +34,17 @@ public class Student {
     public void setGrade(int grade) {
         this.grade = grade;
     }
-    
-    public int compareTo(Student s){ 
-        return this.grade - s.getGrade(); 
+
+    public int compareTo(Student s) {
+        return this.grade - s.getGrade();
     }
-    
-            public String fileFormat(){ 
-           return this.name + "@" + this.grade; 
-        }
-            
-            public int compareTo(String name){ 
-                return this.name.compareToIgnoreCase(name); 
-            }
-    
-    
-    
+
+    public String fileFormat() {
+        return this.name + "@" + this.grade;
+    }
+
+    public int compareTo(String name) {
+        return this.name.compareToIgnoreCase(name);
+    }
+
 }

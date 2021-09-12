@@ -13,12 +13,13 @@ import java.util.Scanner;
  *
  * @author Karinak
  */
-public class Grades {
-    private String [] arr = new String[200]; 
-    private int size; 
-     
+public class GradesArray {
 
-public Grades(){ try {
+    private String[] arr = new String[200];
+    private int size;
+
+    public GradesArray() {
+        try {
             Scanner sc = new Scanner(new File("data\\Grades.txt"));
 
             while (sc.hasNext()) {
@@ -35,11 +36,10 @@ public Grades(){ try {
             System.out.println("Students file not found");
 
         }
-} 
+    }
 
     public String[] getArr() {
         return arr;
     }
-
 
 }

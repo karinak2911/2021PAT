@@ -155,36 +155,35 @@ public class Home extends javax.swing.JFrame {
     private void placeOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new PlaceOrder().setVisible(true);
-		//and close this screen.
-		dispose();
+        new PlaceOrder().setVisible(true);
+        //and close this screen.
+        dispose();
 
     }//GEN-LAST:event_placeOrderButtonActionPerformed
 
     private void manageMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new ManageMenu().setVisible(true);
-		//and close this screen.
-		dispose();
+        new ManageMenu().setVisible(true);
+        //and close this screen.
+        dispose();
 
-        
     }//GEN-LAST:event_manageMenuButtonActionPerformed
 
     private void viewOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrdersButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new ViewOrders().setVisible(true);
-		//and close this screen.
-		dispose();
+        new ViewOrders().setVisible(true);
+        //and close this screen.
+        dispose();
 
     }//GEN-LAST:event_viewOrdersButtonActionPerformed
 
     private void manageStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStudentButtonActionPerformed
         // TODO add your handling code here://This is how you "open" a new screen based on a button press
-		new ManageStudents().setVisible(true);
-		//and close this screen.
-		dispose();
+        new ManageStudents().setVisible(true);
+        //and close this screen.
+        dispose();
 
     }//GEN-LAST:event_manageStudentButtonActionPerformed
 

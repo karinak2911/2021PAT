@@ -16,57 +16,70 @@ import java.io.PrintWriter;
 public class Order {
 
     private Student s;
-    private OrderedItemArray orderedItems;
+    private OrderedItem[] orderedItemsArr;
+    private int size;
     private String time;
     private boolean paid;
     private double totalPrice;
 
-    public Order(Student s, OrderedItemArray orderedItems, String time, boolean paid, double totalPrice) {
+    public Order(Student s, String time, String paid) {
         this.s = s;
-        this.orderedItems = orderedItems;
         this.time = time;
-        this.paid = paid;
-        this.totalPrice = totalPrice;
+        if(paid.equalsIgnoreCase("Has not paid"))
+            this.paid = false; 
+        else 
+            this.paid = true; 
+        size = 0;
     }
 
-    public Student getS() {
-        return s;
-    }
-
-    public void setS(Student s) {
-        this.s = s;
-    }
-
-    public OrderedItemArray getOrderedItems() {
-        return orderedItems;
-    }
-
-    public void setOrderedItems(OrderedItemArray orderedItems) {
-        this.orderedItems = orderedItems;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public boolean isPaid() {
-        return paid;
+    public void setOrderedItemsArr(OrderedItem[] orderedItemsArr) {
+        this.orderedItemsArr = orderedItemsArr;
     }
 
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public void addToOrder(MenuItem menuItem, int quantity) {
+        size++;
+        orderedItemsArr[size - 1].setName(menuItem.getName());
+        orderedItemsArr[size - 1].setType(menuItem.getType());
+        orderedItemsArr[size - 1].setPrice(menuItem.getPrice());
+        orderedItemsArr[size - 1].setQuantity(quantity);
+
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void deleteFromOrder(MenuItem menuItem) {
+        for (int i = 0; i < size; i++) {
+            if (orderedItemsArr[i].getName().equalsIgnoreCase(menuItem.getName()) && orderedItemsArr[i].getType().equalsIgnoreCase(menuItem.getType())) {
+                this.shiftLeft(i);
+            }
+
+        }
+
+    }
+
+    public void shiftLeft(int index) {
+        for (int i = index; i < size; i++) {
+            orderedItemsArr[i] = orderedItemsArr[i + 1];
+        }
+        size--;
+    }
+
+    public void setTotalPrice() {
+        double total = 0;
+        for (int i = 0; i < size; i++) {
+            total += orderedItemsArr[i].getTotalPriceOfItem();
+        }
+        this.totalPrice = total;
+    }
+
+    public String fileFormat() {
+        String out = "";
+        for (int i = 0; i < size; i++) {
+            out += orderedItemsArr[i].getName() + "@" + orderedItemsArr[i].getType();
+        }
+        return s.getName() + "@" + s.getGrade() + "\n" + out + "\n" + time + paid + totalPrice;
     }
 
 }

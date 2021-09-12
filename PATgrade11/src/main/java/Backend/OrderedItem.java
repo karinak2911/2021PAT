@@ -9,20 +9,22 @@ package Backend;
  *
  * @author Navi
  */
-public class OrderedItem extends MenuItem{
-    
-    private int quantity; 
-    
-    public OrderedItem(int quantity, MenuItem item){ 
-        super(item.name, item.price, item.type); 
-        this.quantity = quantity; 
+public class OrderedItem extends MenuItem {
+
+    private int quantity;
+
+    public OrderedItem(int quantity, MenuItem item) {
+        super(item.name, item.price, item.type);
+        this.quantity = quantity;
     }
-    public double getTotal(){ 
-        return this.quantity * this.price; 
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
-    
-    public String fileFormat(){
-        return this.name + this.type + this.getTotal(); 
+
+    public double getTotalPriceOfItem() {
+        return this.quantity * this.price;
     }
-    
+
+    // add to string method 
 }

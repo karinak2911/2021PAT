@@ -28,7 +28,7 @@ public class StudentArray {
             Scanner sc = new Scanner(new File("data\\Students.txt"));
 
             while (sc.hasNextLine()) {
-                String line = sc.nextLine(); 
+                String line = sc.nextLine();
 
                 Scanner lineSc = new Scanner(line);
                 lineSc.useDelimiter("@");
@@ -74,7 +74,7 @@ public class StudentArray {
         return size;
     }
 
-    public void sort(Student [] studentArr) {
+    public void sort(Student[] studentArr) {
         for (int i = 0; i < size - 1; i++) {
             for (int j = i + 1; j < size; j++) {
                 if (studentArr[i].compareTo(studentArr[j]) > 0) {
@@ -102,7 +102,7 @@ public class StudentArray {
         }
     }
 
-    public void printArrayToFile(Student [] arr) {
+    public void printArrayToFile(Student[] arr) {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("data\\Students.txt"));
             for (int i = 0; i < size; i++) {
@@ -120,12 +120,11 @@ public class StudentArray {
                 this.shiftLeft(i);
             }
 
-            
         }
 
         this.sort(studentArr);
         this.printArrayToFile(studentArr);
-        
+
     }
 
     public void addStudent(String name, int grade) {
@@ -146,12 +145,20 @@ public class StudentArray {
     public Object[][] getStudentTableData() {
         Object[][] out = new Object[size][2];
         for (int row = 0; row < size; row++) {
-           
+
             out[row][0] = studentArr[row].getName();
             out[row][1] = new Integer(studentArr[row].getGrade());
-     
-        }
-        return out; 
 
+        }
+        return out;
+
+    }
+    
+    public Student getStudentForOrder(String name){ 
+        for(int i = 0; i < size; i++){ 
+            if(name.equalsIgnoreCase(studentArr[i].getName()))
+                return studentArr[i]; 
+        }
+        return null; 
     }
 }

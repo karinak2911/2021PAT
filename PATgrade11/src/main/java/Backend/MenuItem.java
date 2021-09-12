@@ -10,10 +10,10 @@ package Backend;
  * @author Navi
  */
 public class MenuItem {
-    protected String name; 
-    protected double price; 
-    protected String type; 
-    
+
+    protected String name;
+    protected double price;
+    protected String type;
 
     public MenuItem(String name, double price, String type) {
         this.name = name;
@@ -44,12 +44,9 @@ public class MenuItem {
     public void setType(String type) {
         this.type = type;
     }
-    
-    public String fileFormat(){ 
-        return name + "@" + price + "@" + type; 
+
+    public String fileFormat() {
+        return name + "@" + price + "@" + type;
     }
-   
-                
-                
-    
+
 }

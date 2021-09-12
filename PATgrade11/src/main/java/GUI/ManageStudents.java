@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Backend.Grades;
+import Backend.GradesArray;
 import Backend.MenuItemArray;
 import Backend.StudentArray;
 import javax.swing.DefaultComboBoxModel;
@@ -22,18 +22,15 @@ public class ManageStudents extends javax.swing.JFrame {
      */
     public ManageStudents() {
         initComponents();
-        
-        
-DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
-		Grades grades = new Grades(); 
-                String [] gradesForCombo = grades.getArr(); 
-		for (int i = 0; i < gradesForCombo.length; i++) {
-			comboModel.addElement(gradesForCombo[i]);
-		}
-		gradeComboBox.setModel(comboModel);
-                
-                
-                
+
+        DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+        GradesArray grades = new GradesArray();
+        String[] gradesForCombo = grades.getArr();
+        for (int i = 0; i < gradesForCombo.length; i++) {
+            comboModel.addElement(gradesForCombo[i]);
+        }
+        gradeComboBox.setModel(comboModel);
+
         StudentArray students = new StudentArray();
         String[] coloumNames = new String[2];
         coloumNames[0] = "Names";
@@ -44,8 +41,6 @@ DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
         DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         studentsTable.setModel(model);
 
-        
-        
     }
 
     /**
@@ -231,15 +226,15 @@ DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         // TODO add your handling code here:
-        
+
         StudentArray manage = new StudentArray();
         String nameAndSurname = nameAndSurnameTextField.getText();
-        int grade = Integer.parseInt((String)gradeComboBox.getSelectedItem());
+        int grade = Integer.parseInt((String) gradeComboBox.getSelectedItem());
 
         //Use the backend to manipulate the textfile data
         manage.addStudent(nameAndSurname, grade);
         //Use the backend to update the frontend
-        
+
         String[] coloumNames = new String[2];
         coloumNames[0] = "Names";
         coloumNames[1] = "Grade";
@@ -263,9 +258,8 @@ DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
     private void deleteStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentButtonActionPerformed
         // TODO add your handling code here:
         StudentArray arr = new StudentArray();
-        int row = studentsTable.getSelectedRow(); 
+        int row = studentsTable.getSelectedRow();
         String nameAndSurname = (String) studentsTable.getValueAt(row, 0);
-        
 
         //Use the backend to manipulate the textfile data
         arr.deleteStudent(nameAndSurname);
@@ -284,7 +278,7 @@ DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

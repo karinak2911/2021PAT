@@ -20,21 +20,18 @@ public class ManageMenu extends javax.swing.JFrame {
      */
     public ManageMenu() {
         initComponents();
-        
-        
-        
-         MenuItemArray items  = new MenuItemArray();
+
+        MenuItemArray items = new MenuItemArray();
         String[] coloumNames = new String[3];
         coloumNames[0] = "Names";
         coloumNames[1] = "Type";
-        coloumNames[2] = "Price"; 
+        coloumNames[2] = "Price";
 
-        Object[][] data = items.getMenuItemFormMangeMenu(); 
+        Object[][] data = items.getMenuItemFormMangeMenu();
 
         DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         menuTable.setModel(model);
-        
-        
+
         sandwichRadioButton.setActionCommand("Sandwich");
         wrapRadioButton.setActionCommand("Wrap");
         drinkRadioButton.setActionCommand("Drink");
@@ -279,34 +276,33 @@ public class ManageMenu extends javax.swing.JFrame {
 
     private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
         // TODO add your handling code here:
-        
-         MenuItemArray arr = new MenuItemArray();
-        int row = menuTable.getSelectedRow(); 
+
+        MenuItemArray arr = new MenuItemArray();
+        int row = menuTable.getSelectedRow();
         String name = (String) menuTable.getValueAt(row, 0);
-        String type = (String) menuTable.getValueAt(row, 1); 
-        
+        String type = (String) menuTable.getValueAt(row, 1);
 
         //Use the backend to manipulate the textfile data
         arr.deleteMenuItem(name, type);
-        MenuItemArray items  = new MenuItemArray();
+        MenuItemArray items = new MenuItemArray();
         String[] coloumNames = new String[3];
         coloumNames[0] = "Names";
         coloumNames[1] = "Type";
-        coloumNames[2] = "Price"; 
+        coloumNames[2] = "Price";
 
-        Object[][] data = items.getMenuItemFormMangeMenu(); 
+        Object[][] data = items.getMenuItemFormMangeMenu();
 
         DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         menuTable.setModel(model);
-        
+
     }//GEN-LAST:event_removeItemButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
         //This is how you "open" a new screen based on a button press
-		new Home().setVisible(true);
-		//and close this screen.
-		dispose();
+        new Home().setVisible(true);
+        //and close this screen.
+        dispose();
 
     }//GEN-LAST:event_homeButtonActionPerformed
 
@@ -328,23 +324,22 @@ public class ManageMenu extends javax.swing.JFrame {
 
     private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
         // TODO add your handling code here:
-        
-         MenuItemArray manage = new MenuItemArray();
+
+        MenuItemArray manage = new MenuItemArray();
         String name = itemNameTextField.getText();
-        String type = (String) typeButtonGroup.getSelection().getActionCommand(); 
-        double price = Double.parseDouble(itempriceTextField.getText()) ; 
+        String type = (String) typeButtonGroup.getSelection().getActionCommand();
+        double price = Double.parseDouble(itempriceTextField.getText());
 
         //Use the backend to manipulate the textfile data
         manage.addMenuItem(name, price, type);
-        
-        
-         MenuItemArray items  = new MenuItemArray();
+
+        MenuItemArray items = new MenuItemArray();
         String[] coloumNames = new String[3];
         coloumNames[0] = "Names";
         coloumNames[1] = "Type";
-        coloumNames[2] = "Price"; 
+        coloumNames[2] = "Price";
 
-        Object[][] data = items.getMenuItemFormMangeMenu(); 
+        Object[][] data = items.getMenuItemFormMangeMenu();
 
         DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         menuTable.setModel(model);
@@ -376,7 +371,7 @@ public class ManageMenu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ManageMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
- // homeButton/editor-fold>
+        // homeButton/editor-fold>
         //</editor-fold>
         //</editor-fold>
 
