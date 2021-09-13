@@ -16,37 +16,30 @@ import java.io.PrintWriter;
 public class Order {
 
     private Student s;
-    private OrderedItem[] orderedItemsArr;
+    private OrderedItem[] orderedItemsArr = new OrderedItem[150];
     private int size;
     private String time;
     private boolean paid;
     private double totalPrice;
 
-    public Order(Student s, String time, String paid) {
-        this.s = s;
-        this.time = time;
+    public Order() {
+        
+        
+        size = 0;
+    }
+
+
+    public void setPaid(String paid) {
         if(paid.equalsIgnoreCase("Has not paid"))
             this.paid = false; 
         else 
             this.paid = true; 
-        size = 0;
-    }
-
-    public void setOrderedItemsArr(OrderedItem[] orderedItemsArr) {
-        this.orderedItemsArr = orderedItemsArr;
-    }
-
-    public void setPaid(boolean paid) {
-        this.paid = paid;
     }
 
     public void addToOrder(MenuItem menuItem, int quantity) {
+        OrderedItem newItem = new OrderedItem(quantity, menuItem);
+        orderedItemsArr[size] = newItem; 
         size++;
-        orderedItemsArr[size - 1].setName(menuItem.getName());
-        orderedItemsArr[size - 1].setType(menuItem.getType());
-        orderedItemsArr[size - 1].setPrice(menuItem.getPrice());
-        orderedItemsArr[size - 1].setQuantity(quantity);
-
     }
 
     public void deleteFromOrder(MenuItem menuItem) {
@@ -59,11 +52,27 @@ public class Order {
 
     }
 
-    public void shiftLeft(int index) {
+    private void shiftLeft(int index) {
         for (int i = index; i < size; i++) {
             orderedItemsArr[i] = orderedItemsArr[i + 1];
         }
         size--;
+    }
+
+    public void setS(Student s) {
+        this.s = s;
+    }
+
+    public void setOrderedItemsArr(OrderedItem[] orderedItemsArr) {
+        this.orderedItemsArr = orderedItemsArr;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public void setTotalPrice() {
@@ -77,9 +86,9 @@ public class Order {
     public String fileFormat() {
         String out = "";
         for (int i = 0; i < size; i++) {
-            out += orderedItemsArr[i].getName() + "@" + orderedItemsArr[i].getType();
+            out += orderedItemsArr[i].getName() + "@" + orderedItemsArr[i].getType() + "*" + orderedItemsArr[i].getQuantity();
         }
-        return s.getName() + "@" + s.getGrade() + "\n" + out + "\n" + time + paid + totalPrice;
+        return s.getName() + "@" + s.getGrade() + "\n" + out + "\n" + time + "\n" + paid + "\n" + totalPrice;
     }
 
 }

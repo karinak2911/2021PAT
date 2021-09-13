@@ -25,20 +25,22 @@ public class PlaceOrder extends javax.swing.JFrame {
      */
     public PlaceOrder() {
         initComponents();
-        DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+        DefaultComboBoxModel<String> comboModelTypes = new DefaultComboBoxModel<String>();
         ItemTypesArray itemNames = new ItemTypesArray();
         String[] types = itemNames.getArr();
         for (int i = 0; i < types.length; i++) {
-            comboModel.addElement(types[i]);
+            comboModelTypes.addElement(types[i]);
         }
-        itemTypeComboBox.setModel(comboModel);
+        itemTypeComboBox.setModel(comboModelTypes);
 
+        
+        DefaultComboBoxModel<String> comboModelStudents = new DefaultComboBoxModel<String>();
         StudentArray students = new StudentArray();
         String[] namesForCombo = students.getStudentsnamesAsarrayForComboBox();
         for (int i = 0; i < namesForCombo.length; i++) {
-            comboModel.addElement(namesForCombo[i]);
+            comboModelStudents.addElement(namesForCombo[i]);
         }
-        studentsComboBox.setModel(comboModel);
+        studentsComboBox.setModel(comboModelStudents);
 
         firstBreakRadioButton.setActionCommand("First Break");
         secondBreakRadioButton.setActionCommand("Second Break");
@@ -63,6 +65,8 @@ public class PlaceOrder extends javax.swing.JFrame {
         coloumnNamesForOrderTable [1] = "Item Type"; 
         coloumnNamesForOrderTable[2] = "Quanity"; 
         coloumnNamesForOrderTable[3] = "Price"; 
+        
+        Order currentOrder = new Order(); 
 
     }
 
@@ -186,6 +190,11 @@ public class PlaceOrder extends javax.swing.JFrame {
         totalPriceLabel.setText("Total Price:");
 
         addToOrderButton.setText("ADD TO ORDER");
+        addToOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addToOrderButtonActionPerformed(evt);
+            }
+        });
 
         menuItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -311,7 +320,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(totalPriceLabel)
-                        .addContainerGap(631, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -499,10 +508,15 @@ public class PlaceOrder extends javax.swing.JFrame {
         String time = (String)timeButtonGroup.getSelection().getActionCommand(); 
         String paid = (String)paidButtonGroup.getSelection().getActionCommand(); 
         
-        Order tuckshopOrder = new Order(s, time, paid); 
+         
         
 
     }//GEN-LAST:event_addOrderButtonActionPerformed
+
+    private void addToOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_addToOrderButtonActionPerformed
 
     /**
      * @param args the command line arguments

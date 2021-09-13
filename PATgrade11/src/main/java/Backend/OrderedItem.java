@@ -17,7 +17,11 @@ public class OrderedItem extends MenuItem {
         super(item.name, item.price, item.type);
         this.quantity = quantity;
     }
+ 
 
+    public int getQuantity() {
+        return quantity;
+    }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -25,6 +29,9 @@ public class OrderedItem extends MenuItem {
     public double getTotalPriceOfItem() {
         return this.quantity * this.price;
     }
+    
+    
+    
 
     // add to string method 
 }
