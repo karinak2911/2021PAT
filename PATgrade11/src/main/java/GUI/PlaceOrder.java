@@ -8,7 +8,9 @@ package GUI;
 import Backend.MenuItemArray;
 import Backend.StudentArray;
 import Backend.ItemTypesArray;
+import Backend.MenuItem;
 import Backend.Order;
+import Backend.OrderedItemArray;
 import Backend.Student;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
@@ -20,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PlaceOrder extends javax.swing.JFrame {
 
-    
+    private Order currentOrder; 
+    private OrderedItemArray itemArr; 
     
     /**
      * Creates new form Menu
@@ -62,13 +65,21 @@ public class PlaceOrder extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForMenuTable);
         menuItemsTable.setModel(model);
         
-        String [] coloumnNamesForOrderTable = new String[4]; 
-        coloumnNamesForOrderTable[0] = "Item Name"; 
-        coloumnNamesForOrderTable [1] = "Item Type"; 
-        coloumnNamesForOrderTable[2] = "Quanity"; 
-        coloumnNamesForOrderTable[3] = "Price"; 
+         totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
+       
+       String [] coloumnNamesForCurrentOrderTable = new String[4]; 
+        coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
+        coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
+        coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
+        coloumnNamesForCurrentOrderTable[3] = "Quantity"; 
+        coloumnNamesForCurrentOrderTable[4] = "Total"; 
         
-        Order currentOrder = new Order(); 
+        Object [][] data2 =  itemArr.getOrdredItemsData(); 
+        DefaultTableModel model2 = new DefaultTableModel(data2, coloumnNamesForCurrentOrderTable);
+        currentOrderTable.setModel(model2);
+
+        
+        totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
 
     }
 
@@ -98,6 +109,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         studentLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         priceTextArea = new javax.swing.JTextArea();
+        doneButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         itemTypeLabel = new javax.swing.JLabel();
         quantityLabel = new javax.swing.JLabel();
@@ -125,7 +137,6 @@ public class PlaceOrder extends javax.swing.JFrame {
         totalPriceTextArea = new javax.swing.JTextArea();
         addOrderButton = new javax.swing.JButton();
         menuLabel = new javax.swing.JLabel();
-        doneButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,6 +189,8 @@ public class PlaceOrder extends javax.swing.JFrame {
         priceTextArea.setColumns(20);
         priceTextArea.setRows(5);
         jScrollPane3.setViewportView(priceTextArea);
+
+        doneButton.setText("DONE");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -276,6 +289,11 @@ public class PlaceOrder extends javax.swing.JFrame {
         });
 
         removeFromOrderButton.setText("REMOVE FROM ORDER");
+        removeFromOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeFromOrderButtonActionPerformed(evt);
+            }
+        });
 
         currentOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -302,8 +320,6 @@ public class PlaceOrder extends javax.swing.JFrame {
         });
 
         menuLabel.setText("Menu: ");
-
-        doneButton.setText("DONE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -333,51 +349,46 @@ public class PlaceOrder extends javax.swing.JFrame {
                 .addComponent(menuLabel)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(addToOrderButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(timeLabel))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(itemTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(itemTypeLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(quantityLabel)
+                                    .addGap(11, 11, 11))))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(studentsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(firstBreakRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(secondBreakRadioButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(afterSchoolRadioButton))
+                        .addGap(367, 367, 367)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(addToOrderButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(timeLabel))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(itemTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(itemTypeLabel)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(quantityLabel)
-                                            .addGap(11, 11, 11))))))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(367, 367, 367)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(removeFromOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(39, 39, 39)
-                                        .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(studentsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(firstBreakRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(secondBreakRadioButton)
+                .addGap(18, 18, 18)
+                .addComponent(afterSchoolRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(removeFromOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,9 +400,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(removeFromOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(doneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(removeFromOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(menuLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -507,18 +516,75 @@ public class PlaceOrder extends javax.swing.JFrame {
         String name = (String)(studentsComboBox.getSelectedItem()); 
         StudentArray students = new StudentArray(); 
         Student s = students.getStudentForOrder(name); 
-        String time = (String)timeButtonGroup.getSelection().getActionCommand(); 
-        String paid = (String)paidButtonGroup.getSelection().getActionCommand(); 
+        double total = currentOrder.getTotalPrice(); 
         
-         
+        int time  = Integer.parseInt((String)timeButtonGroup.getSelection().getActionCommand()); 
+        boolean paid = Boolean.parseBoolean((String)paidButtonGroup.getSelection().getActionCommand()); 
         
-
+         currentOrder.setS(s);
+         currentOrder.setPaid(paid);
+         currentOrder.setTime(time);
+       currentOrder.setTotalPrice(total);
+        
+       
+      
     }//GEN-LAST:event_addOrderButtonActionPerformed
 
     private void addToOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderButtonActionPerformed
         // TODO add your handling code here:
+        int row = menuItemsTable.getSelectedRow(); 
+        String name = (String) menuItemsTable.getValueAt(row, 0); 
+        double price = Double.parseDouble((String) menuItemsTable.getValueAt(row, 1));
+        String type = (String)itemTypeComboBox.getSelectedItem(); 
+        int quantity = (Integer)quantitySpinner.getValue(); 
+        MenuItem currentMenuItem = new MenuItem(name, price, type); 
+        itemArr.add(currentMenuItem, quantity); 
         
+        
+        
+        
+        totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
+        
+         totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
+       
+       String [] coloumnNamesForCurrentOrderTable = new String[4]; 
+        coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
+        coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
+        coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
+        coloumnNamesForCurrentOrderTable[3] = "Quantity"; 
+        coloumnNamesForCurrentOrderTable[4] = "Total"; 
+        
+        Object [][] data =  itemArr.getOrdredItemsData(); 
+        DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForCurrentOrderTable);
+        currentOrderTable.setModel(model);
+
     }//GEN-LAST:event_addToOrderButtonActionPerformed
+
+    private void removeFromOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromOrderButtonActionPerformed
+        // TODO add your handling code here:
+        int row = currentOrderTable.getSelectedRow(); 
+        String name = (String) currentOrderTable.getValueAt(row, 0); 
+        String type = (String) currentOrderTable.getValueAt(row, 1);
+        double price = Double.parseDouble((String) menuItemsTable.getValueAt(row, 1)); 
+        MenuItem currentMenuItem = new MenuItem(name, price, type);
+        itemArr.delete(currentMenuItem);
+        
+         totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
+       
+       String [] coloumnNamesForCurrentOrderTable = new String[4]; 
+        coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
+        coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
+        coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
+        coloumnNamesForCurrentOrderTable[3] = "Quantity"; 
+        coloumnNamesForCurrentOrderTable[4] = "Total"; 
+        
+        Object [][] data =  itemArr.getOrdredItemsData(); 
+        DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForCurrentOrderTable);
+        currentOrderTable.setModel(model);
+
+        
+        
+    }//GEN-LAST:event_removeFromOrderButtonActionPerformed
 
     /**
      * @param args the command line arguments

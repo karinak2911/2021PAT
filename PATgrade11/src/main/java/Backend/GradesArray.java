@@ -33,7 +33,7 @@ public class GradesArray {
             sc.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Students file not found");
+            System.out.println("Grades file not found");
 
         }
     }

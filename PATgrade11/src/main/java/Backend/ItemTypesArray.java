@@ -33,7 +33,7 @@ public class ItemTypesArray {
             sc.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("Students file not found");
+            System.out.println("Item types file not found");
 
         }
 

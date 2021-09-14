@@ -44,6 +44,8 @@ public class MenuItem {
     public void setType(String type) {
         this.type = type;
     }
+    
+    
 
     public String fileFormat() {
         return name + "@" + price + "@" + type;

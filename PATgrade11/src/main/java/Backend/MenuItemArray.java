@@ -38,7 +38,7 @@ public class MenuItemArray {
                 size++;
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(StudentArray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Menu text file not found");
         }
 
     }
@@ -110,6 +110,7 @@ public class MenuItemArray {
 
         return out;
     }
+    
 
     public Object[][] getMenuItemFormMangeMenu() {
 

@@ -29,28 +29,49 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-   
-
-    
-
-
-
-   
-
-    public void setTotalPrice() {
-        double total = 0;
-        for (int i = 0; i < size; i++) {
-            total += orderedItemsArr[i].getTotalPriceOfItem();
-        }
-        this.totalPrice = total;
-    }
-
     public String fileFormat() {
-        String out = "";
-        for (int i = 0; i < size; i++) {
-            out += orderedItemsArr[i].getName() + orderedItemsArr[i].getType() + "*" + orderedItemsArr[i].getQuantity() + "\t";
-        }
-        return s.getName() + "@" + s.getGrade() + "\n" + out + "\n" + time + "\n" + paid + "\n" + totalPrice;
+        return s.fileFormat() + "\n" + arr.fileFormat() + "\n" + time + "\n" + paid + "\n" + totalPrice;
     }
 
+    public Student getS() {
+        return s;
+    }
+
+    public void setS(Student s) {
+        this.s = s;
+    }
+
+    public OrderedItemArray getArr() {
+        return arr;
+    }
+
+    public void setArr(OrderedItemArray arr) {
+        this.arr = arr;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
+   
 }

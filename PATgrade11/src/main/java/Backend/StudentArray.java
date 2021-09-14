@@ -147,7 +147,7 @@ public class StudentArray {
         for (int row = 0; row < size; row++) {
 
             out[row][0] = studentArr[row].getName();
-            out[row][1] = new Integer(studentArr[row].getGrade());
+            out[row][1] = studentArr[row].getGrade();
 
         }
         return out;
