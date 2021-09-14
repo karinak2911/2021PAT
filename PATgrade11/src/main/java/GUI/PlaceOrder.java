@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PlaceOrder extends javax.swing.JFrame {
 
+    
+    
     /**
      * Creates new form Menu
      */
@@ -42,11 +44,11 @@ public class PlaceOrder extends javax.swing.JFrame {
         }
         studentsComboBox.setModel(comboModelStudents);
 
-        firstBreakRadioButton.setActionCommand("First Break");
-        secondBreakRadioButton.setActionCommand("Second Break");
-        afterSchoolRadioButton.setActionCommand("After school");
-        hasNotPaidRadioButton.setActionCommand("Has not paid");
-        hasPaidRadioButton.setActionCommand("Has paid");
+        firstBreakRadioButton.setActionCommand("0");
+        secondBreakRadioButton.setActionCommand("1");
+        afterSchoolRadioButton.setActionCommand("2");
+        hasNotPaidRadioButton.setActionCommand("false");
+        hasPaidRadioButton.setActionCommand("true");
 
         String[] coloumnNamesForMenuTable = new String[2];
         coloumnNamesForMenuTable[0] = "Names";

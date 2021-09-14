@@ -1,1 +1,5 @@
-Ronaq Sayed@11@
+Ronaq Sayed@11
+Chicken@Burger@20.00@2#Diet@Coke@Drink@10.00@1
+0
+true
+60.00

@@ -16,64 +16,26 @@ import java.io.PrintWriter;
 public class Order {
 
     private Student s;
-    private OrderedItem[] orderedItemsArr = new OrderedItem[150];
-    private int size;
-    private String time;
+    private OrderedItemArray arr; 
+    private int time;
     private boolean paid;
     private double totalPrice;
 
-    public Order() {
-        
-        
-        size = 0;
-    }
-
-
-    public void setPaid(String paid) {
-        if(paid.equalsIgnoreCase("Has not paid"))
-            this.paid = false; 
-        else 
-            this.paid = true; 
-    }
-
-    public void addToOrder(MenuItem menuItem, int quantity) {
-        OrderedItem newItem = new OrderedItem(quantity, menuItem);
-        orderedItemsArr[size] = newItem; 
-        size++;
-    }
-
-    public void deleteFromOrder(MenuItem menuItem) {
-        for (int i = 0; i < size; i++) {
-            if (orderedItemsArr[i].getName().equalsIgnoreCase(menuItem.getName()) && orderedItemsArr[i].getType().equalsIgnoreCase(menuItem.getType())) {
-                this.shiftLeft(i);
-            }
-
-        }
-
-    }
-
-    private void shiftLeft(int index) {
-        for (int i = index; i < size; i++) {
-            orderedItemsArr[i] = orderedItemsArr[i + 1];
-        }
-        size--;
-    }
-
-    public void setS(Student s) {
+    public Order(Student s, OrderedItemArray arr, int time, boolean paid, double totalPrice) {
         this.s = s;
-    }
-
-    public void setOrderedItemsArr(OrderedItem[] orderedItemsArr) {
-        this.orderedItemsArr = orderedItemsArr;
-    }
-
-    public void setTime(String time) {
+        this.arr = arr;
         this.time = time;
-    }
-
-    public void setTotalPrice(double totalPrice) {
+        this.paid = paid;
         this.totalPrice = totalPrice;
     }
+
+   
+
+    
+
+
+
+   
 
     public void setTotalPrice() {
         double total = 0;
@@ -86,7 +48,7 @@ public class Order {
     public String fileFormat() {
         String out = "";
         for (int i = 0; i < size; i++) {
-            out += orderedItemsArr[i].getName() + "@" + orderedItemsArr[i].getType() + "*" + orderedItemsArr[i].getQuantity();
+            out += orderedItemsArr[i].getName() + orderedItemsArr[i].getType() + "*" + orderedItemsArr[i].getQuantity() + "\t";
         }
         return s.getName() + "@" + s.getGrade() + "\n" + out + "\n" + time + "\n" + paid + "\n" + totalPrice;
     }

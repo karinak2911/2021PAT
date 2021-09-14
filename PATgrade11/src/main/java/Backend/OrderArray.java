@@ -21,6 +21,8 @@ public class OrderArray {
     public OrderArray() {
         try {
             Scanner sc = new Scanner(new File("data\\Orders.txt"));
+            OrderedItem [] itemArr = new OrderedItem[150]; 
+            int sizeArr = 0; 
 
             while (sc.hasNextLine()) {
                 Scanner lineScStudent = new Scanner(sc.nextLine());
@@ -29,9 +31,6 @@ public class OrderArray {
                 int grade = sc.nextInt();
                 Student s = new Student(name, grade);
                 
-                
-                OrderedItem [] itemArr = new OrderedItemArr[150]; 
-                int sizeArr = 0; 
                 Scanner lineScItems = new Scanner(sc.nextLine()); 
                 lineScItems.useDelimiter("#"); 
                 while(lineScItems.hasNext()){ 
@@ -40,15 +39,19 @@ public class OrderArray {
                     singleItemSc.useDelimiter("@"); 
                     String itemName = singleItemSc.next(); 
                     String itemType = singleItemSc.next(); 
-                    MenuItem currentItem = new MenuItem (itemName, 0, itemType); 
-                    OrderedItem currentItemArr = new OrderedItem(currentItem, 0); 
+                    double itemPrice = singleItemSc.nextDouble(); 
+                    int itemQuantity = singleItemSc.nextInt(); 
+                    MenuItem currentMenuItem = new MenuItem(itemName, itemPrice, itemType); 
+                    OrderedItem currentItemArr = new OrderedItem(itemQuantity, currentMenuItem);  
                     itemArr[sizeArr] = currentItemArr; 
                     sizeArr++; 
                 }
                 
-                String time = sc.nextLine(); 
-                String paid = sc.nextLine(); 
+                int timeInt = sc.nextInt(); 
+                boolean paid = sc.nextBoolean(); 
                 double totalprice = sc.nextDouble(); 
+                
+                arr[size] = new Order(s, )
 
                 size++;
                 
