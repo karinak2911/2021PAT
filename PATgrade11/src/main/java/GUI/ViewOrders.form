@@ -37,6 +37,8 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.ButtonGroup" name="ordersButtonGroup">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -210,7 +212,7 @@
         <Component class="javax.swing.JRadioButton" name="paidOrdersOnlyRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="viewOrdersButtonGroup"/>
+              <ComponentRef name="ordersButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="PAID ORDERS ONLY"/>
             <Property name="actionCommand" type="java.lang.String" value="PAID ORDERS"/>
@@ -222,7 +224,7 @@
         <Component class="javax.swing.JRadioButton" name="notPaidOrdersRadioButton">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="viewOrdersButtonGroup"/>
+              <ComponentRef name="ordersButtonGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="UNPAID ORDERS ONLY"/>
             <Property name="actionCommand" type="java.lang.String" value="UNPAID ORDERS"/>

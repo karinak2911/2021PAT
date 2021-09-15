@@ -28,11 +28,11 @@ public class OrderArray {
             int sizeArr = 0; 
              OrderedItemArray orderedItemArr = new OrderedItemArray(); 
 
-            while (sc.hasNextLine()) {
+            while (sc.hasNext()) {
                 Scanner lineScStudent = new Scanner(sc.nextLine());
                 lineScStudent.useDelimiter("@");
-                String name = sc.next();
-                int grade = sc.nextInt();
+                String name = lineScStudent.next();
+                int grade = lineScStudent.nextInt();
                 Student s = new Student(name, grade);
                 
                 Scanner lineScItems = new Scanner(sc.nextLine()); 
@@ -87,6 +87,7 @@ public class OrderArray {
      public void addOrder(Order order){ 
          arr[size] = order; 
          size++; 
+         this.printToFile();
      }
      
      public void printToFile(){ 

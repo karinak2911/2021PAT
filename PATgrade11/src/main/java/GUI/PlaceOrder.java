@@ -10,6 +10,7 @@ import Backend.StudentArray;
 import Backend.ItemTypesArray;
 import Backend.MenuItem;
 import Backend.Order;
+import Backend.OrderArray;
 import Backend.OrderedItemArray;
 import Backend.Student;
 import javax.swing.DefaultComboBoxModel;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PlaceOrder extends javax.swing.JFrame {
 
-    private Order currentOrder; 
+    
     private OrderedItemArray itemArr; 
     
     /**
@@ -30,6 +31,7 @@ public class PlaceOrder extends javax.swing.JFrame {
      */
     public PlaceOrder() {
         initComponents();
+        itemArr = new OrderedItemArray(); 
         DefaultComboBoxModel<String> comboModelTypes = new DefaultComboBoxModel<String>();
         ItemTypesArray itemNames = new ItemTypesArray();
         String[] types = itemNames.getArr();
@@ -67,7 +69,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         
          totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
        
-       String [] coloumnNamesForCurrentOrderTable = new String[4]; 
+       String [] coloumnNamesForCurrentOrderTable = new String[5]; 
         coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
         coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
         coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
@@ -516,15 +518,20 @@ public class PlaceOrder extends javax.swing.JFrame {
         String name = (String)(studentsComboBox.getSelectedItem()); 
         StudentArray students = new StudentArray(); 
         Student s = students.getStudentForOrder(name); 
-        double total = currentOrder.getTotalPrice(); 
+        double total = Double.parseDouble(totalPriceTextArea.getText()); 
         
         int time  = Integer.parseInt((String)timeButtonGroup.getSelection().getActionCommand()); 
         boolean paid = Boolean.parseBoolean((String)paidButtonGroup.getSelection().getActionCommand()); 
         
-         currentOrder.setS(s);
-         currentOrder.setPaid(paid);
-         currentOrder.setTime(time);
-       currentOrder.setTotalPrice(total);
+         
+       Order currentorder = new Order(s, itemArr, time, paid, total); 
+       OrderArray orderArr = new OrderArray(); 
+       orderArr.addOrder(currentorder);
+       
+        new Home().setVisible(true);
+        //and close this screen.
+        dispose();
+       
         
        
       
@@ -533,8 +540,9 @@ public class PlaceOrder extends javax.swing.JFrame {
     private void addToOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderButtonActionPerformed
         // TODO add your handling code here:
         int row = menuItemsTable.getSelectedRow(); 
-        String name = (String) menuItemsTable.getValueAt(row, 0); 
-        double price = Double.parseDouble((String) menuItemsTable.getValueAt(row, 1));
+        String name = (String) menuItemsTable.getValueAt(row, 0);
+        
+        double price = (double)menuItemsTable.getValueAt(row, 1);
         String type = (String)itemTypeComboBox.getSelectedItem(); 
         int quantity = (Integer)quantitySpinner.getValue(); 
         MenuItem currentMenuItem = new MenuItem(name, price, type); 
@@ -547,7 +555,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         
          totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
        
-       String [] coloumnNamesForCurrentOrderTable = new String[4]; 
+       String [] coloumnNamesForCurrentOrderTable = new String[5]; 
         coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
         coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
         coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
@@ -565,13 +573,13 @@ public class PlaceOrder extends javax.swing.JFrame {
         int row = currentOrderTable.getSelectedRow(); 
         String name = (String) currentOrderTable.getValueAt(row, 0); 
         String type = (String) currentOrderTable.getValueAt(row, 1);
-        double price = Double.parseDouble((String) menuItemsTable.getValueAt(row, 1)); 
+        double price = (double) menuItemsTable.getValueAt(row, 1); 
         MenuItem currentMenuItem = new MenuItem(name, price, type);
         itemArr.delete(currentMenuItem);
         
          totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
        
-       String [] coloumnNamesForCurrentOrderTable = new String[4]; 
+       String [] coloumnNamesForCurrentOrderTable = new String[5]; 
         coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
         coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
         coloumnNamesForCurrentOrderTable[2] = "Item Price"; 

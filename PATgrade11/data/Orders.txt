@@ -1,5 +1,10 @@
 Ronaq Sayed@11
-Chicken@Burger@20.00@2#Diet@Coke@Drink@10.00@1
+Chicken@Burger@20.0@2#Diet Coke@Drink@10.0@1
 0
 true
-60.00
+50.0
+Gia Naicker@2
+Chicken and mayo@Sandwich@12.0@1#Sprite@Drink@12.0@2#Beetroot and feta@Salad@30.0@3
+0
+false
+126.0

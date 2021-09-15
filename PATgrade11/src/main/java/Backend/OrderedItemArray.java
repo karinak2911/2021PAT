@@ -47,7 +47,7 @@ public class OrderedItemArray {
     public String fileFormat(){ 
         String out = ""; 
         for(int i = 0; i < size; i++){ 
-            out += arr[i].getName() + "@" + arr[i].getType() + "@"+ arr[i].getPrice() + "@" + arr[i].getQuantity(); 
+            out += arr[i].getName() + "@" + arr[i].getType() + "@"+ arr[i].getPrice() + "@" + arr[i].getQuantity() + "#"; 
         }
         return out; 
     }
@@ -71,19 +71,20 @@ public class OrderedItemArray {
     public String toString(){ 
         String out = ""; 
         for(int i = 0; i < size; i++){ 
-            out += arr[i].getName() + " " + arr[i].getType() + " "  + arr[i].getPrice() + "*" + arr[i].getQuantity() + "\t"; 
+            out += arr[i].getName() + " " + arr[i].getType() + " "  + arr[i].getPrice() + "@" + arr[i].getQuantity() + "#"; 
         }
         return out; 
     } 
     
      public Object[][] getOrdredItemsData() {
-        Object[][] out = new Object[size][4];
+        Object[][] out = new Object[size][5];
         for (int row = 0; row < size; row++) {
 
             out[row][0] = arr[row].getName();
             out[row][1] = arr[row].getType(); 
             out[row][2] = arr[row].getPrice(); 
             out[row][3] = arr[row].getQuantity(); 
+            out [row][4] = arr[row].getTotalPriceOfItem(); 
 
         }
         return out;

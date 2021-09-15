@@ -18,9 +18,10 @@ public class ViewOrders extends javax.swing.JFrame {
      * Creates new form ViewOrders
      */
     public ViewOrders() {
+        initComponents();
        paidOrdersOnlyRadioButton.setActionCommand("true");
        notPaidOrdersRadioButton.setActionCommand("false");
-        
+
         
     }
     /**
@@ -37,6 +38,7 @@ public class ViewOrders extends javax.swing.JFrame {
         viewOrdersButtonGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        ordersButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         homeButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -86,7 +88,7 @@ public class ViewOrders extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(ordersTable);
 
-        viewOrdersButtonGroup.add(paidOrdersOnlyRadioButton);
+        ordersButtonGroup.add(paidOrdersOnlyRadioButton);
         paidOrdersOnlyRadioButton.setText("PAID ORDERS ONLY");
         paidOrdersOnlyRadioButton.setActionCommand("PAID ORDERS");
         paidOrdersOnlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +97,7 @@ public class ViewOrders extends javax.swing.JFrame {
             }
         });
 
-        viewOrdersButtonGroup.add(notPaidOrdersRadioButton);
+        ordersButtonGroup.add(notPaidOrdersRadioButton);
         notPaidOrdersRadioButton.setText("UNPAID ORDERS ONLY");
         notPaidOrdersRadioButton.setActionCommand("UNPAID ORDERS");
         notPaidOrdersRadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -198,14 +200,13 @@ public class ViewOrders extends javax.swing.JFrame {
 
     private void viewOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrdersButtonActionPerformed
         // TODO add your handling code here:
-        
-        String paidStr = (String)viewOrdersButtonGroup.getSelection().getActionCommand(); 
-        
+        System.out.println("");
+        String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand(); 
+        System.out.println(paidStr);
         boolean paid = Boolean.parseBoolean(paidStr); 
         
         
         OrderArray allOrders = new OrderArray(); 
-        initComponents();
         String [] coloumNames = new String[6]; 
         coloumNames[0] = "Student Name"; 
         coloumNames[1] = "Grade"; 
@@ -294,6 +295,7 @@ public class ViewOrders extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JRadioButton notPaidOrdersRadioButton;
+    private javax.swing.ButtonGroup ordersButtonGroup;
     private javax.swing.JTable ordersTable;
     private javax.swing.JRadioButton paidOrdersOnlyRadioButton;
     private javax.swing.JButton viewOrdersButton;
