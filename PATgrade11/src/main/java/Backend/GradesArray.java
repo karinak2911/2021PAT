@@ -13,6 +13,8 @@ import java.util.Scanner;
  *
  * @author Karinak
  */
+
+// this class gets the grades from a text file and puts it into an array 
 public class GradesArray {
 
     private String[] arr = new String[200];

@@ -49,7 +49,8 @@ public class OrderedItemArray {
         for(int i = 0; i < size; i++){ 
             out += arr[i].getName() + "@" + arr[i].getType() + "@"+ arr[i].getPrice() + "@" + arr[i].getQuantity() + "#"; 
         }
-        return out; 
+        String output = out.substring(0, out.length()- 1); 
+        return output; 
     }
 
     public OrderedItem[] getArr() {
@@ -71,7 +72,7 @@ public class OrderedItemArray {
     public String toString(){ 
         String out = ""; 
         for(int i = 0; i < size; i++){ 
-            out += arr[i].getName() + " " + arr[i].getType() + " "  + arr[i].getPrice() + "@" + arr[i].getQuantity() + "#"; 
+            out += arr[i].getName() + " " + arr[i].getType() + "@"  + arr[i].getPrice() + "*" + arr[i].getQuantity(); 
         }
         return out; 
     } 

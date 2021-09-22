@@ -69,7 +69,6 @@ public class Home extends javax.swing.JFrame {
         tuckshopManagerLabel.setForeground(new java.awt.Color(255, 255, 255));
         tuckshopManagerLabel.setText("TUCKSHOP MANAGER");
 
-        manageMenuButton.setBackground(new java.awt.Color(255, 255, 255));
         manageMenuButton.setText("MANAGE MENU ");
         manageMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

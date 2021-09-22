@@ -16,3 +16,4 @@ Bos iced tea@17.0@Drink
 Chicken prego @18.0@Sandwich
 Frappuchino @25.0@Drink
 Vegetarian@22.0@Burger
+Trigz chips@10.0@Snack

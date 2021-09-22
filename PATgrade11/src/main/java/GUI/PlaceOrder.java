@@ -52,6 +52,8 @@ public class PlaceOrder extends javax.swing.JFrame {
         firstBreakRadioButton.setActionCommand("0");
         secondBreakRadioButton.setActionCommand("1");
         afterSchoolRadioButton.setActionCommand("2");
+        
+        
         hasNotPaidRadioButton.setActionCommand("false");
         hasPaidRadioButton.setActionCommand("true");
 
@@ -254,11 +256,13 @@ public class PlaceOrder extends javax.swing.JFrame {
         jLabel1.setText("Current Order:");
 
         paidButtonGroup.add(hasNotPaidRadioButton);
+        hasNotPaidRadioButton.setSelected(true);
         hasNotPaidRadioButton.setText("Has not paid");
 
         timeLabel.setText("Time:");
 
         timeButtonGroup.add(firstBreakRadioButton);
+        firstBreakRadioButton.setSelected(true);
         firstBreakRadioButton.setText("First Break");
         firstBreakRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +270,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             }
         });
 
+        timeButtonGroup.add(secondBreakRadioButton);
         secondBreakRadioButton.setText("Second Break ");
 
         timeButtonGroup.add(afterSchoolRadioButton);
@@ -331,12 +336,9 @@ public class PlaceOrder extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(paidLabel)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(hasPaidRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(hasNotPaidRadioButton))
-                    .addComponent(addOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(110, 110, 110)
+                    .addComponent(addOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hasNotPaidRadioButton))
+                .addGap(157, 157, 157)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(totalPriceLabel)
@@ -383,14 +385,19 @@ public class PlaceOrder extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(studentsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addComponent(firstBreakRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(secondBreakRadioButton)
-                .addGap(18, 18, 18)
-                .addComponent(afterSchoolRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(removeFromOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(hasPaidRadioButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(firstBreakRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(secondBreakRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(afterSchoolRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeFromOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +527,9 @@ public class PlaceOrder extends javax.swing.JFrame {
         Student s = students.getStudentForOrder(name); 
         double total = Double.parseDouble(totalPriceTextArea.getText()); 
         
-        int time  = Integer.parseInt((String)timeButtonGroup.getSelection().getActionCommand()); 
+        String st = (String)timeButtonGroup.getSelection().getActionCommand();
+        System.out.println(st);
+        int time  = Integer.parseInt(st); 
         boolean paid = Boolean.parseBoolean((String)paidButtonGroup.getSelection().getActionCommand()); 
         
          

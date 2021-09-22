@@ -13,6 +13,7 @@ import java.io.PrintWriter;
  *
  * @author Navi
  */
+// this class is a template for an order 
 public class Order {
 
     private Student s;
@@ -33,7 +34,7 @@ public class Order {
         return s.fileFormat() + "\n" + arr.fileFormat() + "\n" + time + "\n" + paid + "\n" + totalPrice;
     }
 
-    public Student getS() {
+    public Student getStudent() {
         return s;
     }
 
@@ -41,7 +42,7 @@ public class Order {
         this.s = s;
     }
 
-    public OrderedItemArray getArr() {
+    public OrderedItemArray getOrderedItemArr() {
         return arr;
     }
 

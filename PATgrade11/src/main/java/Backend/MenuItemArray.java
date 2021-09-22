@@ -23,6 +23,8 @@ public class MenuItemArray {
     MenuItem[] menuItemArr = new MenuItem[200];
     private int size;
 
+    
+    //contructor gets all the current menu items from a text file and adds it to the array
     public MenuItemArray() {
         try {
             File f = new File("data\\MenuItems.txt");
@@ -43,6 +45,7 @@ public class MenuItemArray {
 
     }
 
+    // gets the fields of the menu item and adds the new item to the array 
     public void addMenuItem(String name, double price, String type) {
         this.shiftRight(size - 1);
         menuItemArr[size - 1] = new MenuItem(name, price, type);
@@ -64,6 +67,7 @@ public class MenuItemArray {
         size--;
     }
 
+    // removes the menu item from the array and prints the array to file 
     public void deleteMenuItem(String name, String type) {
         for (int i = 0; i < size; i++) {
             if (menuItemArr[i].getName().equalsIgnoreCase(name) && menuItemArr[i].getType().equalsIgnoreCase(type)) {
@@ -86,6 +90,7 @@ public class MenuItemArray {
         }
     }
 
+    // gets the number of menu items of a specific type to be displayed in the table 
     public int getOutSize(String type) {
         int outsize = 0;
         for (int i = 0; i < size; i++) {
@@ -96,6 +101,7 @@ public class MenuItemArray {
         return outsize;
     }
 
+    // returns an object array of the menu items based of a specific inputed type to be displayed in the table 
     public Object[][] getMenuItemFromType(String type) {
         int outsize = this.getOutSize(type);
         Object[][] out = new Object[outsize][2];
@@ -111,7 +117,7 @@ public class MenuItemArray {
         return out;
     }
     
-
+// returns an object array of the menu items to be viewed on the manage menu screen 
     public Object[][] getMenuItemFormMangeMenu() {
 
         Object[][] out = new Object[size][3];
@@ -124,5 +130,6 @@ public class MenuItemArray {
         }
         return out;
     }
+
 
 }

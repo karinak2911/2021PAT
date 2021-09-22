@@ -13,6 +13,7 @@ import java.util.Scanner;
  *
  * @author Karinak
  */
+// this class gets the types of item avaiable at the tuckshop from a text file and puts it into an array 
 public class ItemTypesArray {
 
     private String[] arr = new String[200];

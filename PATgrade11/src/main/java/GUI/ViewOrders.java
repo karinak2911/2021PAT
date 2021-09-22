@@ -6,6 +6,8 @@
 package GUI;
 
 import Backend.OrderArray;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,9 +21,26 @@ public class ViewOrders extends javax.swing.JFrame {
      */
     public ViewOrders() {
         initComponents();
-       paidOrdersOnlyRadioButton.setActionCommand("true");
+       paidOrdersRadioButton.setActionCommand("true");
        notPaidOrdersRadioButton.setActionCommand("false");
-
+String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand(); 
+        System.out.println(paidStr);
+        boolean paid = Boolean.parseBoolean(paidStr); 
+        
+        
+        OrderArray allOrders = new OrderArray(); 
+        String [] coloumNames = new String[6]; 
+        coloumNames[0] = "Student Name"; 
+        coloumNames[1] = "Grade"; 
+        coloumNames[2] = "Order"; 
+        coloumNames[3] = "Time"; 
+        coloumNames[4] = "Paid"; 
+        coloumNames[5] = "Total"; 
+        
+       Object [][] data = allOrders.getOrdersForTable(paid); 
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames); 
+        ordersTable.setModel(model);
+        
         
     }
     /**
@@ -35,7 +54,6 @@ public class ViewOrders extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        viewOrdersButtonGroup = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         ordersButtonGroup = new javax.swing.ButtonGroup();
@@ -43,7 +61,7 @@ public class ViewOrders extends javax.swing.JFrame {
         homeButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ordersTable = new javax.swing.JTable();
-        paidOrdersOnlyRadioButton = new javax.swing.JRadioButton();
+        paidOrdersRadioButton = new javax.swing.JRadioButton();
         notPaidOrdersRadioButton = new javax.swing.JRadioButton();
         changeToPaidButton = new javax.swing.JButton();
         viewOrdersButton = new javax.swing.JButton();
@@ -86,14 +104,16 @@ public class ViewOrders extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        ordersTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane2.setViewportView(ordersTable);
 
-        ordersButtonGroup.add(paidOrdersOnlyRadioButton);
-        paidOrdersOnlyRadioButton.setText("PAID ORDERS ONLY");
-        paidOrdersOnlyRadioButton.setActionCommand("PAID ORDERS");
-        paidOrdersOnlyRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        ordersButtonGroup.add(paidOrdersRadioButton);
+        paidOrdersRadioButton.setSelected(true);
+        paidOrdersRadioButton.setText("PAID ORDERS ONLY");
+        paidOrdersRadioButton.setActionCommand("PAID ORDERS");
+        paidOrdersRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paidOrdersOnlyRadioButtonActionPerformed(evt);
+                paidOrdersRadioButtonActionPerformed(evt);
             }
         });
 
@@ -129,40 +149,45 @@ public class ViewOrders extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(paidOrdersOnlyRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(changeToPaidButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(viewOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(notPaidOrdersRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(changeToPaidButton))
-                                .addGap(0, 124, Short.MAX_VALUE))))))
+                                    .addComponent(paidOrdersRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(viewOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(notPaidOrdersRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(homeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(60, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(paidOrdersOnlyRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
+                        .addComponent(paidOrdersRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(notPaidOrdersRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(viewOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addComponent(changeToPaidButton, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))))
+                        .addGap(20, 20, 20))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,7 +196,8 @@ public class ViewOrders extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +211,9 @@ public class ViewOrders extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_notPaidOrdersRadioButtonActionPerformed
 
-    private void paidOrdersOnlyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paidOrdersOnlyRadioButtonActionPerformed
+    private void paidOrdersRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paidOrdersRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_paidOrdersOnlyRadioButtonActionPerformed
+    }//GEN-LAST:event_paidOrdersRadioButtonActionPerformed
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         // TODO add your handling code here:
@@ -218,6 +244,7 @@ public class ViewOrders extends javax.swing.JFrame {
        Object [][] data = allOrders.getOrdersForTable(paid); 
         DefaultTableModel model = new DefaultTableModel(data, coloumNames); 
         ordersTable.setModel(model);
+        
     }//GEN-LAST:event_viewOrdersButtonActionPerformed
 
     private void changeToPaidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeToPaidButtonActionPerformed
@@ -227,13 +254,12 @@ public class ViewOrders extends javax.swing.JFrame {
         String order = (String) ordersTable.getValueAt(row, 2); 
       orders.changeToPaid(order);
       
-       String paidStr = (String)viewOrdersButtonGroup.getSelection().getActionCommand(); 
-        
+ String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand(); 
+        System.out.println(paidStr);
         boolean paid = Boolean.parseBoolean(paidStr); 
         
         
         OrderArray allOrders = new OrderArray(); 
-        initComponents();
         String [] coloumNames = new String[6]; 
         coloumNames[0] = "Student Name"; 
         coloumNames[1] = "Grade"; 
@@ -244,6 +270,7 @@ public class ViewOrders extends javax.swing.JFrame {
         
        Object [][] data = allOrders.getOrdersForTable(paid); 
         DefaultTableModel model = new DefaultTableModel(data, coloumNames); 
+
         ordersTable.setModel(model);
         
         
@@ -297,8 +324,7 @@ public class ViewOrders extends javax.swing.JFrame {
     private javax.swing.JRadioButton notPaidOrdersRadioButton;
     private javax.swing.ButtonGroup ordersButtonGroup;
     private javax.swing.JTable ordersTable;
-    private javax.swing.JRadioButton paidOrdersOnlyRadioButton;
+    private javax.swing.JRadioButton paidOrdersRadioButton;
     private javax.swing.JButton viewOrdersButton;
-    private javax.swing.ButtonGroup viewOrdersButtonGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ package Backend;
  *
  * @author Navi
  */
+// this class constructs a menu item by giving it fields 
 public class MenuItem {
 
     protected String name;
