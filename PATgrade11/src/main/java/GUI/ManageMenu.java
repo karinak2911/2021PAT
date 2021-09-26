@@ -103,6 +103,7 @@ public class ManageMenu extends javax.swing.JFrame {
         itemTypeLabel.setText("Item type: ");
 
         typeButtonGroup.add(sandwichRadioButton);
+        sandwichRadioButton.setSelected(true);
         sandwichRadioButton.setText("Sandwich");
 
         typeButtonGroup.add(burgerRadioButton);
