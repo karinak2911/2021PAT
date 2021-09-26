@@ -21,28 +21,31 @@ public class ViewOrders extends javax.swing.JFrame {
      */
     public ViewOrders() {
         initComponents();
-       paidOrdersRadioButton.setActionCommand("true");
-       notPaidOrdersRadioButton.setActionCommand("false");
-String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand(); 
-        System.out.println(paidStr);
-        boolean paid = Boolean.parseBoolean(paidStr); 
-        
-        
-        OrderArray allOrders = new OrderArray(); 
-        String [] coloumNames = new String[6]; 
-        coloumNames[0] = "Student Name"; 
-        coloumNames[1] = "Grade"; 
-        coloumNames[2] = "Order"; 
-        coloumNames[3] = "Time"; 
-        coloumNames[4] = "Paid"; 
-        coloumNames[5] = "Total"; 
-        
-       Object [][] data = allOrders.getOrdersForTable(paid); 
-        DefaultTableModel model = new DefaultTableModel(data, coloumNames); 
+
+        // sets the action commands for teh radio buttons 
+        paidOrdersRadioButton.setActionCommand("true");
+        notPaidOrdersRadioButton.setActionCommand("false");
+
+        // gets the selected radio button when screen is created and populates table. Thsi by default is the paid order 
+        String paidStr = (String) ordersButtonGroup.getSelection().getActionCommand();
+        boolean paid = Boolean.parseBoolean(paidStr);
+
+        // creates an order array object to get all teh orders from a text file 
+        OrderArray orders = new OrderArray();
+        String[] coloumNames = new String[6];
+        coloumNames[0] = "Student Name";
+        coloumNames[1] = "Grade";
+        coloumNames[2] = "Order";
+        coloumNames[3] = "Time";
+        coloumNames[4] = "Paid";
+        coloumNames[5] = "Total";
+        // populates table with data 
+        Object[][] data = orders.getOrdersForTable(paid);
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         ordersTable.setModel(model);
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -226,55 +229,54 @@ String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand();
 
     private void viewOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrdersButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("");
-        String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand(); 
+
+        String paidStr = (String) ordersButtonGroup.getSelection().getActionCommand();
         System.out.println(paidStr);
-        boolean paid = Boolean.parseBoolean(paidStr); 
-        
-        
-        OrderArray allOrders = new OrderArray(); 
-        String [] coloumNames = new String[6]; 
-        coloumNames[0] = "Student Name"; 
-        coloumNames[1] = "Grade"; 
-        coloumNames[2] = "Order"; 
-        coloumNames[3] = "Time"; 
-        coloumNames[4] = "Paid"; 
-        coloumNames[5] = "Total"; 
-        
-       Object [][] data = allOrders.getOrdersForTable(paid); 
-        DefaultTableModel model = new DefaultTableModel(data, coloumNames); 
+        boolean paid = Boolean.parseBoolean(paidStr);
+
+        // creates an order array object to get all teh orders from a text file 
+        OrderArray orders = new OrderArray();
+        String[] coloumNames = new String[6];
+        coloumNames[0] = "Student Name";
+        coloumNames[1] = "Grade";
+        coloumNames[2] = "Order";
+        coloumNames[3] = "Time";
+        coloumNames[4] = "Paid";
+        coloumNames[5] = "Total";
+        // populates table with data requested from radio button 
+        Object[][] data = orders.getOrdersForTable(paid);
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         ordersTable.setModel(model);
-        
+
     }//GEN-LAST:event_viewOrdersButtonActionPerformed
 
     private void changeToPaidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeToPaidButtonActionPerformed
         // TODO add your handling code here:
-        OrderArray orders = new OrderArray(); 
-        int row = ordersTable.getSelectedRow(); 
-        String order = (String) ordersTable.getValueAt(row, 2); 
-      orders.changeToPaid(order);
-      
- String paidStr = (String)ordersButtonGroup.getSelection().getActionCommand(); 
-        System.out.println(paidStr);
-        boolean paid = Boolean.parseBoolean(paidStr); 
-        
-        
-        OrderArray allOrders = new OrderArray(); 
-        String [] coloumNames = new String[6]; 
-        coloumNames[0] = "Student Name"; 
-        coloumNames[1] = "Grade"; 
-        coloumNames[2] = "Order"; 
-        coloumNames[3] = "Time"; 
-        coloumNames[4] = "Paid"; 
-        coloumNames[5] = "Total"; 
-        
-       Object [][] data = allOrders.getOrdersForTable(paid); 
-        DefaultTableModel model = new DefaultTableModel(data, coloumNames); 
+        // creates a new order array object 
+        OrderArray orders = new OrderArray();
+        // gets data of order from the selected row 
+        int row = ordersTable.getSelectedRow();
+        // gets a string of the ordered items from selected orders to compare this with orders in the array 
+        String orderToChange = (String) ordersTable.getValueAt(row, 2);
+        // changes the order to paid in the array 
+        orders.changeToPaid(orderToChange);
 
+        String paidStr = (String) ordersButtonGroup.getSelection().getActionCommand();
+        // updates table 
+        boolean paid = Boolean.parseBoolean(paidStr);
+
+        String[] coloumNames = new String[6];
+        coloumNames[0] = "Student Name";
+        coloumNames[1] = "Grade";
+        coloumNames[2] = "Order";
+        coloumNames[3] = "Time";
+        coloumNames[4] = "Paid";
+        coloumNames[5] = "Total";
+        Object[][] data = orders.getOrdersForTable(paid);
+        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         ordersTable.setModel(model);
-        
-        
-        
+
+
     }//GEN-LAST:event_changeToPaidButtonActionPerformed
 
     /**

@@ -16,7 +16,7 @@ import java.util.Scanner;
 // this class gets the types of item avaiable at the tuckshop from a text file and puts it into an array 
 public class ItemTypesArray {
 
-    private String[] arr = new String[200];
+    private String[] itemTypesArr = new String[200];
     private int size;
 
     public ItemTypesArray() {
@@ -27,7 +27,7 @@ public class ItemTypesArray {
 
                 String type = sc.nextLine();
 
-                arr[size] = type;
+                itemTypesArr[size] = type;
                 size++;
 
             }
@@ -40,8 +40,9 @@ public class ItemTypesArray {
 
     }
 
+    // the array can be accessed for the combo box
     public String[] getArr() {
-        return arr;
+        return itemTypesArr;
     }
 
 }

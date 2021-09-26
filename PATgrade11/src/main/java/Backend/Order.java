@@ -17,21 +17,22 @@ import java.io.PrintWriter;
 public class Order {
 
     private Student s;
-    private OrderedItemArray arr; 
+    private OrderedItemArray orderedItemArr;
     private int time;
     private boolean paid;
     private double totalPrice;
 
     public Order(Student s, OrderedItemArray arr, int time, boolean paid, double totalPrice) {
         this.s = s;
-        this.arr = arr;
+        this.orderedItemArr = arr;
         this.time = time;
         this.paid = paid;
         this.totalPrice = totalPrice;
     }
 
+    // this is how an order is printed to the file 
     public String fileFormat() {
-        return s.fileFormat() + "\n" + arr.fileFormat() + "\n" + time + "\n" + paid + "\n" + totalPrice;
+        return s.fileFormat() + "\n" + orderedItemArr.fileFormat() + "\n" + time + "\n" + paid + "\n" + totalPrice;
     }
 
     public Student getStudent() {
@@ -43,11 +44,11 @@ public class Order {
     }
 
     public OrderedItemArray getOrderedItemArr() {
-        return arr;
+        return orderedItemArr;
     }
 
     public void setArr(OrderedItemArray arr) {
-        this.arr = arr;
+        this.orderedItemArr = arr;
     }
 
     public int getTime() {
@@ -73,6 +74,5 @@ public class Order {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-    
-   
+
 }

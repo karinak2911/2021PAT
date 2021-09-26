@@ -43,6 +43,7 @@ public class Student {
         return this.name + "@" + this.grade;
     }
 
+    // the compare to method for a student compares names 
     public int compareTo(String name) {
         return this.name.compareToIgnoreCase(name);
     }

@@ -22,23 +22,23 @@ public class ManageStudents extends javax.swing.JFrame {
      */
     public ManageStudents() {
         initComponents();
-
-        DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+// creats a combo box model 
+        DefaultComboBoxModel<String> comboModelGrades = new DefaultComboBoxModel<String>();
         GradesArray grades = new GradesArray();
         String[] gradesForCombo = grades.getArr();
         for (int i = 0; i < gradesForCombo.length; i++) {
-            comboModel.addElement(gradesForCombo[i]);
+            comboModelGrades.addElement(gradesForCombo[i]);
         }
-        gradeComboBox.setModel(comboModel);
+        gradeComboBox.setModel(comboModelGrades);
 
+        // creates a student array object 
         StudentArray students = new StudentArray();
-        String[] coloumNames = new String[2];
-        coloumNames[0] = "Names";
-        coloumNames[1] = "Grade";
-
+        String[] coloumNamesForStudentTb = new String[2];
+        coloumNamesForStudentTb[0] = "Names";
+        coloumNamesForStudentTb[1] = "Grade";
+        // gets data and populates table model, then sets table to table model
         Object[][] data = students.getStudentTableData();
-
-        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+        DefaultTableModel model = new DefaultTableModel(data, coloumNamesForStudentTb);
         studentsTable.setModel(model);
 
     }
@@ -227,21 +227,19 @@ public class ManageStudents extends javax.swing.JFrame {
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         // TODO add your handling code here:
 
-        StudentArray manage = new StudentArray();
+        StudentArray students = new StudentArray();
+        // gets the details fo student to be added to array 
         String nameAndSurname = nameAndSurnameTextField.getText();
         int grade = Integer.parseInt((String) gradeComboBox.getSelectedItem());
+        // adds student to array 
+        students.addStudent(nameAndSurname, grade);
 
-        //Use the backend to manipulate the textfile data
-        manage.addStudent(nameAndSurname, grade);
-        //Use the backend to update the frontend
-
-        String[] coloumNames = new String[2];
-        coloumNames[0] = "Names";
-        coloumNames[1] = "Grade";
-
-        Object[][] data = manage.getStudentTableData();
-
-        DefaultTableModel model = new DefaultTableModel(data, coloumNames);
+// repopulates table 
+        String[] coloumNamesForStudentTb = new String[2];
+        coloumNamesForStudentTb[0] = "Names";
+        coloumNamesForStudentTb[1] = "Grade";
+        Object[][] data = students.getStudentTableData();
+        DefaultTableModel model = new DefaultTableModel(data, coloumNamesForStudentTb);
         studentsTable.setModel(model);
 
     }//GEN-LAST:event_addStudentButtonActionPerformed
@@ -257,19 +255,18 @@ public class ManageStudents extends javax.swing.JFrame {
 
     private void deleteStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStudentButtonActionPerformed
         // TODO add your handling code here:
-        StudentArray arr = new StudentArray();
+        StudentArray students = new StudentArray();
+        // gets data from table of selected student to delete 
         int row = studentsTable.getSelectedRow();
         String nameAndSurname = (String) studentsTable.getValueAt(row, 0);
+        //removes student from array 
+        students.deleteStudent(nameAndSurname);
 
-        //Use the backend to manipulate the textfile data
-        arr.deleteStudent(nameAndSurname);
-        StudentArray students = new StudentArray();
+        // repopulates table 
         String[] coloumNames = new String[2];
         coloumNames[0] = "Names";
         coloumNames[1] = "Grade";
-
         Object[][] data = students.getStudentTableData();
-
         DefaultTableModel model = new DefaultTableModel(data, coloumNames);
         studentsTable.setModel(model);
     }//GEN-LAST:event_deleteStudentButtonActionPerformed

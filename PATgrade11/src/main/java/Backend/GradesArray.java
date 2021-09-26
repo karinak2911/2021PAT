@@ -13,11 +13,10 @@ import java.util.Scanner;
  *
  * @author Karinak
  */
-
 // this class gets the grades from a text file and puts it into an array 
 public class GradesArray {
 
-    private String[] arr = new String[200];
+    private String[] gradesArr = new String[200];
     private int size;
 
     public GradesArray() {
@@ -28,7 +27,7 @@ public class GradesArray {
 
                 String grade = sc.next();
 
-                arr[size] = grade;
+                gradesArr[size] = grade;
                 size++;
 
             }
@@ -40,8 +39,9 @@ public class GradesArray {
         }
     }
 
+    // the array can be accessed from a combo box 
     public String[] getArr() {
-        return arr;
+        return gradesArr;
     }
 
 }

@@ -9,7 +9,7 @@ package Backend;
  *
  * @author Navi
  */
-// this class constructs a menu item by giving it fields 
+// this class constructs a menu item by giving its fields 
 public class MenuItem {
 
     protected String name;
@@ -45,8 +45,6 @@ public class MenuItem {
     public void setType(String type) {
         this.type = type;
     }
-    
-    
 
     public String fileFormat() {
         return name + "@" + price + "@" + type;

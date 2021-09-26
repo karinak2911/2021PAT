@@ -23,7 +23,6 @@ public class MenuItemArray {
     MenuItem[] menuItemArr = new MenuItem[200];
     private int size;
 
-    
     //contructor gets all the current menu items from a text file and adds it to the array
     public MenuItemArray() {
         try {
@@ -67,7 +66,7 @@ public class MenuItemArray {
         size--;
     }
 
-    // removes the menu item from the array and prints the array to file 
+    // removes the menu item from the array and prints the array to file. It compares the name and type of the selected menu item with items in the array 
     public void deleteMenuItem(String name, String type) {
         for (int i = 0; i < size; i++) {
             if (menuItemArr[i].getName().equalsIgnoreCase(name) && menuItemArr[i].getType().equalsIgnoreCase(type)) {
@@ -78,6 +77,7 @@ public class MenuItemArray {
         }
     }
 
+// this method prints the current start of the array to the file 
     public void printArrayToFile() {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("data\\MenuItems.txt"));
@@ -116,8 +116,8 @@ public class MenuItemArray {
 
         return out;
     }
-    
-// returns an object array of the menu items to be viewed on the manage menu screen 
+
+// returns an object array of the menu items to be viewed on the manage menu screen. This alows the whole menu item to be viewed on the manage menu screen
     public Object[][] getMenuItemFormMangeMenu() {
 
         Object[][] out = new Object[size][3];
@@ -130,6 +130,5 @@ public class MenuItemArray {
         }
         return out;
     }
-
 
 }

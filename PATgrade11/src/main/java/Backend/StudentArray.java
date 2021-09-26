@@ -49,45 +49,16 @@ public class StudentArray {
 
     }
 
+    // returns an array of students for combo box 
     public String[] getStudentsnamesAsarrayForComboBox() {
-        try {
-            Scanner sc = new Scanner(new File("data\\Students.txt"));
-
-            String[] outputArr = new String[size];
-            int currentIndex = 0;
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                Scanner lineSc = new Scanner(line).useDelimiter("@");
-                String studentName = lineSc.next();
-                outputArr[currentIndex] = studentName;
-                currentIndex++;
-            }
-            sc.close();
-            return outputArr;
-        } catch (FileNotFoundException ex) {
-            System.out.println("Students file not found");
-            return null;
+        String[] output = new String[200];
+        for (int i = 0; i < size; i++) {
+            output[i] = studentArr[i].getName();
         }
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void sort(Student[] studentArr) {
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = i + 1; j < size; j++) {
-                if (studentArr[i].compareTo(studentArr[j]) > 0) {
-                    Student temp = studentArr[j];
-                    studentArr[j] = studentArr[i];
-                    studentArr[i] = temp;
-                }
-            }
-        }
+        return output;
 
     }
 
-    // have a print array to fill metho, does not apped but overwrites
     public void shiftLeft(int index) {
         for (int i = index; i < size; i++) {
             studentArr[i] = studentArr[i + 1];
@@ -102,6 +73,7 @@ public class StudentArray {
         }
     }
 
+    // overwrites the file 
     public void printArrayToFile(Student[] arr) {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("data\\Students.txt"));
@@ -114,6 +86,7 @@ public class StudentArray {
         }
     }
 
+    // removes student from array using compare to method 
     public void deleteStudent(String name) {
         for (int i = 0; i < size; i++) {
             if (studentArr[i].compareTo(name) == 0) {
@@ -122,11 +95,11 @@ public class StudentArray {
 
         }
 
-        this.sort(studentArr);
         this.printArrayToFile(studentArr);
 
     }
 
+    // adds a student to array 
     public void addStudent(String name, int grade) {
         int index = 0;
         for (int i = 0; i < size; i++) {
@@ -137,11 +110,12 @@ public class StudentArray {
         }
         this.shiftRight(index);
         studentArr[index] = new Student(name, grade);
-        this.sort(studentArr);
+
         this.printArrayToFile(studentArr);
 
     }
 
+    // returns a 2D object array of the students name and grade to populate table for manage students screen 
     public Object[][] getStudentTableData() {
         Object[][] out = new Object[size][2];
         for (int row = 0; row < size; row++) {
@@ -153,12 +127,14 @@ public class StudentArray {
         return out;
 
     }
-    
-    public Student getStudentForOrder(String name){ 
-        for(int i = 0; i < size; i++){ 
-            if(name.equalsIgnoreCase(studentArr[i].getName()))
-                return studentArr[i]; 
+
+    // returns a student for an order based of the name selected 
+    public Student getStudentForOrder(String name) {
+        for (int i = 0; i < size; i++) {
+            if (name.equalsIgnoreCase(studentArr[i].getName())) {
+                return studentArr[i];
+            }
         }
-        return null; 
+        return null;
     }
 }

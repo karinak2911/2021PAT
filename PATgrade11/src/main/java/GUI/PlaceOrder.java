@@ -23,24 +23,26 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PlaceOrder extends javax.swing.JFrame {
 
-    
-    private OrderedItemArray itemArr; 
-    
+    private OrderedItemArray orderedItemArray;
+
     /**
      * Creates new form Menu
      */
     public PlaceOrder() {
         initComponents();
-        itemArr = new OrderedItemArray(); 
+        // creates an ordered item array object as this object is used throught teh jframe 
+        OrderedItemArray orderedItemArray = new OrderedItemArray();
+
+        // creates and sets the model of the combo box for menu item types 
         DefaultComboBoxModel<String> comboModelTypes = new DefaultComboBoxModel<String>();
-        ItemTypesArray itemNames = new ItemTypesArray();
-        String[] types = itemNames.getArr();
+        ItemTypesArray itemTypesArray = new ItemTypesArray();
+        String[] types = itemTypesArray.getArr();
         for (int i = 0; i < types.length; i++) {
             comboModelTypes.addElement(types[i]);
         }
         itemTypeComboBox.setModel(comboModelTypes);
 
-        
+        // creates and sets the model of the combo box for the students by displaying their rnames  
         DefaultComboBoxModel<String> comboModelStudents = new DefaultComboBoxModel<String>();
         StudentArray students = new StudentArray();
         String[] namesForCombo = students.getStudentsnamesAsarrayForComboBox();
@@ -49,11 +51,10 @@ public class PlaceOrder extends javax.swing.JFrame {
         }
         studentsComboBox.setModel(comboModelStudents);
 
+        // sets the action commands of teh radio buttons 
         firstBreakRadioButton.setActionCommand("0");
         secondBreakRadioButton.setActionCommand("1");
         afterSchoolRadioButton.setActionCommand("2");
-        
-        
         hasNotPaidRadioButton.setActionCommand("false");
         hasPaidRadioButton.setActionCommand("true");
 
@@ -63,27 +64,28 @@ public class PlaceOrder extends javax.swing.JFrame {
 
         MenuItemArray menuItems = new MenuItemArray();
 
+        // gets he data for the table based of the selected type of menu item 
         String type = (String) (itemTypeComboBox.getSelectedItem());
-        Object[][] data = menuItems.getMenuItemFromType(type);
+        // creates and sets model of table of menu ietms 
+        Object[][] dataForMenuItemsTb = menuItems.getMenuItemFromType(type);
+        DefaultTableModel menuItemsTbModel = new DefaultTableModel(dataForMenuItemsTb, coloumnNamesForMenuTable);
+        menuItemsTable.setModel(menuItemsTbModel);
 
-        DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForMenuTable);
-        menuItemsTable.setModel(model);
-        
-         totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
-       
-       String [] coloumnNamesForCurrentOrderTable = new String[5]; 
-        coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
-        coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
-        coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
-        coloumnNamesForCurrentOrderTable[3] = "Quantity"; 
-        coloumnNamesForCurrentOrderTable[4] = "Total"; 
-        
-        Object [][] data2 =  itemArr.getOrdredItemsData(); 
-        DefaultTableModel model2 = new DefaultTableModel(data2, coloumnNamesForCurrentOrderTable);
-        currentOrderTable.setModel(model2);
+        // sets the total price field as the current total price of all the ordered items (this when the screen opens is 0) 
+        totalPriceTextArea.setText(Double.toString(orderedItemArray.getTotalPrice()));
 
-        
-        totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
+        // creates model and populates current order table 
+        String[] coloumnNamesForCurrentOrderTable = new String[5];
+        coloumnNamesForCurrentOrderTable[0] = "Item Name";
+        coloumnNamesForCurrentOrderTable[1] = "Item Type";
+        coloumnNamesForCurrentOrderTable[2] = "Item Price";
+        coloumnNamesForCurrentOrderTable[3] = "Quantity";
+        coloumnNamesForCurrentOrderTable[4] = "Total";
+
+        // the data for the current order table is based of the selected menu item and quantitiy of item 
+        Object[][] dataForCurrentOrderTb = orderedItemArray.getOrdredItemsData();
+        DefaultTableModel currentOrderTbModel = new DefaultTableModel(dataForCurrentOrderTb, coloumnNamesForCurrentOrderTable);
+        currentOrderTable.setModel(currentOrderTbModel);
 
     }
 
@@ -447,7 +449,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(hasNotPaidRadioButton)
                                     .addComponent(hasPaidRadioButton))
                                 .addGap(27, 27, 27)
@@ -490,11 +492,13 @@ public class PlaceOrder extends javax.swing.JFrame {
         coloumnNamesForMenuTable[0] = "Names";
         coloumnNamesForMenuTable[1] = "Price";
 
+        // creates new menu item array 
         MenuItemArray menuItems = new MenuItemArray();
 
         String type = (String) (itemTypeComboBox.getSelectedItem());
+        
+        // sets data in table to menu items of selected type 
         Object[][] data = menuItems.getMenuItemFromType(type);
-
         DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForMenuTable);
         menuItemsTable.setModel(model);
 
@@ -522,56 +526,62 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     private void addOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderButtonActionPerformed
         // TODO add your handling code here:
-        String name = (String)(studentsComboBox.getSelectedItem()); 
-        StudentArray students = new StudentArray(); 
-        Student s = students.getStudentForOrder(name); 
-        double total = Double.parseDouble(totalPriceTextArea.getText()); 
-        
-        String st = (String)timeButtonGroup.getSelection().getActionCommand();
-        System.out.println(st);
-        int time  = Integer.parseInt(st); 
-        boolean paid = Boolean.parseBoolean((String)paidButtonGroup.getSelection().getActionCommand()); 
-        
-         
-       Order currentorder = new Order(s, itemArr, time, paid, total); 
-       OrderArray orderArr = new OrderArray(); 
-       orderArr.addOrder(currentorder);
-       
+
+        // a student object is created based of the student name selected from the combo box 
+        String name = (String) (studentsComboBox.getSelectedItem());
+        StudentArray students = new StudentArray();
+        Student s = students.getStudentForOrder(name);
+
+        // the total price of the order is gotten from teh total price text area 
+        double totalPrice = Double.parseDouble(totalPriceTextArea.getText());
+
+        // the time of the order is based of the radio button selection 
+        String timeString = (String) timeButtonGroup.getSelection().getActionCommand();
+        int time = Integer.parseInt(timeString);
+
+        // whether the student has paid is based of the radio button selection 
+        boolean paid = Boolean.parseBoolean((String) paidButtonGroup.getSelection().getActionCommand());
+
+        // a new order object is created  
+        Order newOrder = new Order(s, orderedItemArray, time, paid, totalPrice);
+        OrderArray orderArr = new OrderArray();
+        // this new order is addded to the order array 
+        orderArr.addOrder(newOrder);
+
+        // Sets the home screen 
         new Home().setVisible(true);
         //and close this screen.
         dispose();
-       
-        
-       
-      
+
+
     }//GEN-LAST:event_addOrderButtonActionPerformed
 
     private void addToOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderButtonActionPerformed
         // TODO add your handling code here:
-        int row = menuItemsTable.getSelectedRow(); 
+
+        // gets the fields of the selected menu item 
+        int row = menuItemsTable.getSelectedRow();
         String name = (String) menuItemsTable.getValueAt(row, 0);
-        
-        double price = (double)menuItemsTable.getValueAt(row, 1);
-        String type = (String)itemTypeComboBox.getSelectedItem(); 
-        int quantity = (Integer)quantitySpinner.getValue(); 
-        MenuItem currentMenuItem = new MenuItem(name, price, type); 
-        itemArr.add(currentMenuItem, quantity); 
-        
-        
-        
-        
-        totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
-        
-         totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
-       
-       String [] coloumnNamesForCurrentOrderTable = new String[5]; 
-        coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
-        coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
-        coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
-        coloumnNamesForCurrentOrderTable[3] = "Quantity"; 
-        coloumnNamesForCurrentOrderTable[4] = "Total"; 
-        
-        Object [][] data =  itemArr.getOrdredItemsData(); 
+        double price = (double) menuItemsTable.getValueAt(row, 1);
+        String type = (String) itemTypeComboBox.getSelectedItem();
+        int quantity = (Integer) quantitySpinner.getValue();
+        // creates new menu item 
+        MenuItem currentMenuItem = new MenuItem(name, price, type);
+        // adds item to ordered item arrr 
+        orderedItemArray.add(currentMenuItem, quantity);
+
+        // restes the total price 
+        totalPriceTextArea.setText(Double.toString(orderedItemArray.getTotalPrice()));
+
+        String[] coloumnNamesForCurrentOrderTable = new String[5];
+        coloumnNamesForCurrentOrderTable[0] = "Item Name";
+        coloumnNamesForCurrentOrderTable[1] = "Item Type";
+        coloumnNamesForCurrentOrderTable[2] = "Item Price";
+        coloumnNamesForCurrentOrderTable[3] = "Quantity";
+        coloumnNamesForCurrentOrderTable[4] = "Total";
+
+        // the data for the current order table is based of the selected menu item and quantitiy of item 
+        Object[][] data = orderedItemArray.getOrdredItemsData();
         DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForCurrentOrderTable);
         currentOrderTable.setModel(model);
 
@@ -579,28 +589,33 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     private void removeFromOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFromOrderButtonActionPerformed
         // TODO add your handling code here:
-        int row = currentOrderTable.getSelectedRow(); 
-        String name = (String) currentOrderTable.getValueAt(row, 0); 
+
+        // gets fields of selected ordered item 
+        int row = currentOrderTable.getSelectedRow();
+        String name = (String) currentOrderTable.getValueAt(row, 0);
         String type = (String) currentOrderTable.getValueAt(row, 1);
-        double price = (double) menuItemsTable.getValueAt(row, 1); 
+        double price = (double) menuItemsTable.getValueAt(row, 1);
+        // creates new menu item 
         MenuItem currentMenuItem = new MenuItem(name, price, type);
-        itemArr.delete(currentMenuItem);
-        
-         totalPriceTextArea.setText(Double.toString(itemArr.getTotalPrice()));
-       
-       String [] coloumnNamesForCurrentOrderTable = new String[5]; 
-        coloumnNamesForCurrentOrderTable[0] = "Item Name"; 
-        coloumnNamesForCurrentOrderTable [1] = "Item Type"; 
-        coloumnNamesForCurrentOrderTable[2] = "Item Price"; 
-        coloumnNamesForCurrentOrderTable[3] = "Quantity"; 
-        coloumnNamesForCurrentOrderTable[4] = "Total"; 
-        
-        Object [][] data =  itemArr.getOrdredItemsData(); 
+        // deletes menu item from current order 
+        orderedItemArray.delete(currentMenuItem);
+
+        // resets total price 
+        totalPriceTextArea.setText(Double.toString(orderedItemArray.getTotalPrice()));
+
+        String[] coloumnNamesForCurrentOrderTable = new String[5];
+        coloumnNamesForCurrentOrderTable[0] = "Item Name";
+        coloumnNamesForCurrentOrderTable[1] = "Item Type";
+        coloumnNamesForCurrentOrderTable[2] = "Item Price";
+        coloumnNamesForCurrentOrderTable[3] = "Quantity";
+        coloumnNamesForCurrentOrderTable[4] = "Total";
+
+        // resets data in current order table 
+        Object[][] data = orderedItemArray.getOrdredItemsData();
         DefaultTableModel model = new DefaultTableModel(data, coloumnNamesForCurrentOrderTable);
         currentOrderTable.setModel(model);
 
-        
-        
+
     }//GEN-LAST:event_removeFromOrderButtonActionPerformed
 
     /**

@@ -10,55 +10,61 @@ package Backend;
  * @author Karinak
  */
 public class OrderedItemArray {
-    private OrderedItem [] arr = new OrderedItem[150]; 
-    private int size; 
-    
-    
-     public void add(MenuItem menuItem, int quantity) {
+
+    private OrderedItem[] orderedItemArr = new OrderedItem[150];
+    private int size;
+
+    // this method adds an ordered item the array 
+    public void add(MenuItem menuItem, int quantity) {
         OrderedItem newItem = new OrderedItem(quantity, menuItem);
-        arr[size] = newItem; 
+        orderedItemArr[size] = newItem;
         size++;
     }
 
+    // this method adds an ordered item the array by comparing the name and type 
     public void delete(MenuItem menuItem) {
         for (int i = 0; i < size; i++) {
-            if (arr[i].getName().equalsIgnoreCase(menuItem.getName()) && arr[i].getType().equalsIgnoreCase(menuItem.getType())) {
+            if (orderedItemArr[i].getName().equalsIgnoreCase(menuItem.getName()) && orderedItemArr[i].getType().equalsIgnoreCase(menuItem.getType())) {
                 this.shiftLeft(i);
             }
 
         }
 
     }
+
     private void shiftLeft(int index) {
         for (int i = index; i < size; i++) {
-            arr[i] = arr[i + 1];
+            orderedItemArr[i] = orderedItemArr[i + 1];
         }
         size--;
-        
-          
+
     }
+
+    // the total price of an ordered array is returned with this message. The total price of an order is the sum of teh total price of each ordered item
     public double getTotalPrice() {
         double total = 0;
         for (int i = 0; i < size; i++) {
-            total += arr[i].getTotalPriceOfItem(); 
+            total += orderedItemArr[i].getTotalPriceOfItem();
         }
-        return total; 
+        return total;
     }
-    public String fileFormat(){ 
-        String out = ""; 
-        for(int i = 0; i < size; i++){ 
-            out += arr[i].getName() + "@" + arr[i].getType() + "@"+ arr[i].getPrice() + "@" + arr[i].getQuantity() + "#"; 
+
+    public String fileFormat() {
+        String itemsStr = "";
+        for (int i = 0; i < size; i++) {
+            itemsStr += orderedItemArr[i].getName() + "@" + orderedItemArr[i].getType() + "@" + orderedItemArr[i].getPrice() + "@" + orderedItemArr[i].getQuantity() + "#";
         }
-        String output = out.substring(0, out.length()- 1); 
-        return output; 
+        // the last char is removed as the last car is a hashtag
+        String output = itemsStr.substring(0, itemsStr.length() - 1);
+        return output;
     }
 
     public OrderedItem[] getArr() {
-        return arr;
+        return orderedItemArr;
     }
 
     public void setArr(OrderedItem[] arr) {
-        this.arr = arr;
+        this.orderedItemArr = arr;
     }
 
     public int getSize() {
@@ -68,29 +74,30 @@ public class OrderedItemArray {
     public void setSize(int size) {
         this.size = size;
     }
-    
-    public String toString(){ 
-        String out = ""; 
-        for(int i = 0; i < size; i++){ 
-            out += arr[i].getName() + " " + arr[i].getType() + "@"  + arr[i].getPrice() + "*" + arr[i].getQuantity(); 
+
+    // the toString is used for the table 
+    public String toString() {
+        String out = "";
+        for (int i = 0; i < size; i++) {
+            out += orderedItemArr[i].getName() + " " + orderedItemArr[i].getType() + "@" + orderedItemArr[i].getPrice() + "*" + orderedItemArr[i].getQuantity();
         }
-        return out; 
-    } 
-    
-     public Object[][] getOrdredItemsData() {
+        return out;
+    }
+
+    // this method returns a 2D object array of the ordered items selected to populate the current order table on the place order screen
+    public Object[][] getOrdredItemsData() {
         Object[][] out = new Object[size][5];
         for (int row = 0; row < size; row++) {
 
-            out[row][0] = arr[row].getName();
-            out[row][1] = arr[row].getType(); 
-            out[row][2] = arr[row].getPrice(); 
-            out[row][3] = arr[row].getQuantity(); 
-            out [row][4] = arr[row].getTotalPriceOfItem(); 
+            out[row][0] = orderedItemArr[row].getName();
+            out[row][1] = orderedItemArr[row].getType();
+            out[row][2] = orderedItemArr[row].getPrice();
+            out[row][3] = orderedItemArr[row].getQuantity();
+            out[row][4] = orderedItemArr[row].getTotalPriceOfItem();
 
         }
         return out;
 
     }
-    
 
 }
