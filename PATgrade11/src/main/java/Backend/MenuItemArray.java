@@ -52,14 +52,14 @@ public class MenuItemArray {
 
     }
 
-    public void shiftRight(int index) {
+    private void shiftRight(int index) {
         size++;
         for (int i = size - 1; i > index; i--) {
             menuItemArr[i] = menuItemArr[i - 1];
         }
     }
 
-    public void shiftLeft(int index) {
+    private void shiftLeft(int index) {
         for (int i = index; i < size; i++) {
             menuItemArr[i] = menuItemArr[i + 1];
         }
