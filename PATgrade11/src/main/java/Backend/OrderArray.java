@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -31,18 +32,18 @@ public class OrderArray {
                 int sizeArr = 0;
                 OrderedItemArray orderedItemArr = new OrderedItemArray();
                 String studentLine = sc.nextLine();
-                Scanner lineScStudent = new Scanner(studentLine);
+                Scanner lineScStudent = new Scanner(studentLine).useLocale(Locale.US);
                 lineScStudent.useDelimiter("@");
                 String name = lineScStudent.next();
                 int grade = lineScStudent.nextInt();
                 Student s = new Student(name, grade);
 
-                Scanner lineScItems = new Scanner(sc.nextLine());
+                Scanner lineScItems = new Scanner(sc.nextLine()).useLocale(Locale.US);
                 lineScItems.useDelimiter("#");
                 while (lineScItems.hasNext()) {
                     String singleItem = lineScItems.next();
                     Scanner singleItemSc = new Scanner(singleItem);
-                    singleItemSc.useDelimiter("@");
+                    singleItemSc.useDelimiter("@").useLocale(Locale.US);
                     String itemName = singleItemSc.next();
                     String itemType = singleItemSc.next();
                     double itemPrice = singleItemSc.nextDouble();

@@ -17,3 +17,4 @@ Chicken prego @18.0@Sandwich
 Frappuchino @25.0@Drink
 Vegetarian@22.0@Burger
 Trigz chips@10.0@Snack
+Ice tea@10.0@Drink

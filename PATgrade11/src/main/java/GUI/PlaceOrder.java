@@ -31,7 +31,7 @@ public class PlaceOrder extends javax.swing.JFrame {
     public PlaceOrder() {
         initComponents();
         // creates an ordered item array object as this object is used throught teh jframe 
-        OrderedItemArray orderedItemArray = new OrderedItemArray();
+        orderedItemArray = new OrderedItemArray();
 
         // creates and sets the model of the combo box for menu item types 
         DefaultComboBoxModel<String> comboModelTypes = new DefaultComboBoxModel<String>();
@@ -317,6 +317,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(currentOrderTable);
 
+        totalPriceTextArea.setEditable(false);
         totalPriceTextArea.setColumns(20);
         totalPriceTextArea.setRows(5);
         jScrollPane6.setViewportView(totalPriceTextArea);
