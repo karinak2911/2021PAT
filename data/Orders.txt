@@ -1,0 +1,45 @@
+Cole Smith@7
+Avocado and chicken@Wrap@30.0@2
+1
+true
+60.0
+Ryan Griffiths@5
+Chicken@Burger@30.0@2#Beetroot and feta@Salad@30.0@2
+0
+true
+120.0
+Karina Krishnaswamy@11
+Future life energy bar@Snack@16.0@2
+1
+true
+32.0
+Ronaq Sayed@11
+Trigz chips@Snack@10.0@3#Sprite@Drink@12.0@1
+1
+true
+42.0
+Gia Naicker@2
+Chicken@Burger@30.0@1
+0
+true
+30.0
+Monica Bing@6
+Beetroot and feta@Salad@30.0@1
+1
+true
+30.0
+Ronaq Sayed@11
+Muffin@Snack@15.0@2
+1
+true
+30.0
+Neeraav Ranjit@6
+Muffin@Snack@15.0@2
+2
+false
+30.0
+Karina Krishnaswamy@11
+Chicken@Salad@20.0@1
+1
+true
+20.0

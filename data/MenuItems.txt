@@ -1,0 +1,20 @@
+Chicken and mayo@12.0@Sandwich
+Chicken@20.0@Salad
+Diet coke@10.0@Drink
+Muffin@15.0@Snack
+Sprite@12.0@Drink
+Chicken@30.0@Burger
+Beef@30.0@Burger
+Cheese@25.0@Sandwich
+Coke@12.0@Drink
+Avocado and chicken@30.0@Wrap
+Green smoothie@15.0@Drink
+Beetroot and feta@30.0@Salad
+Future life energy bar@16.0@Snack
+Aloe vera water@20.0@Drink
+Bos iced tea@17.0@Drink
+Chicken prego @18.0@Sandwich
+Frappuchino @25.0@Drink
+Vegetarian@22.0@Burger
+Trigz chips@10.0@Snack
+Ice tea@10.0@Drink
