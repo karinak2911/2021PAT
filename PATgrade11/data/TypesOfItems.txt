@@ -1,6 +1,0 @@
-Sandwich
-Wrap
-Burger
-Salad
-Snack
-Drink
